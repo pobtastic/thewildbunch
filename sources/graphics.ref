@@ -1,0 +1,36 @@
+; Copyright 2026 Paul Maddern (paul@arcadegeek.co.uk)
+
+[Graphics:Gunfight Character Sets]
+#HTML(<p>The street-fight sequence — BASIC lines 5019-5070 — re-points
+<code>CHARS</code> at four custom character sets above <code>RAMTOP</code>
+and <code>PRINT</code>s them as layered tiles to build the gunfight graphic.
+Each set is documented glyph-by-glyph at the addresses below; the sheets are
+the 96 glyphs from code 32 to 127.</p>)
+
+#UDGTABLE
+  { =h Character set 1 (CHARS=#N$F2F7; #R$F3F7) }
+  { #FONT$F3F7,96,attr=$07,scale=$02(gunfight-charset-1) }
+UDGTABLE#
+
+#UDGTABLE
+  { =h Character set 2 (CHARS=#N$F5F7; #R$F6F7) }
+  { #FONT$F6F7,96,attr=$07,scale=$02(gunfight-charset-2) }
+UDGTABLE#
+
+#UDGTABLE
+  { =h Character set 3 (CHARS=#N$F8F7; #R$F9F7) }
+  { #FONT$F9F7,96,attr=$07,scale=$02(gunfight-charset-3) }
+UDGTABLE#
+
+#UDGTABLE
+  { =h Character set 4 (CHARS=#N$FBFE; #R$FCFE) }
+  { #FONT$FCFE,96,attr=$07,scale=$02(gunfight-charset-4) }
+UDGTABLE#
+
+[Graphics:Plot And Draw Art]
+#HTML(<p>Other pictures in the game — the town map flourishes, wanted-poster
+face, tombstone / badge endings, and so on — are drawn with BASIC
+<code>PLOT</code> / <code>DRAW</code> / <code>CIRCLE</code>, often from
+the coordinate tables at #R$F320, #R$F35A and #R$F37B. Those are vector
+sequences rather than bitmap tiles, so they are not shown as images
+here.</p>)

@@ -1,0 +1,545 @@
+; Copyright 2026 Paul Maddern (paul@arcadegeek.co.uk)
+
+[Page:Basic]
+PageContent=#INCLUDE(BasicBody)
+
+[Titles]
+Basic=BASIC Listing
+
+[PageHeaders]
+Basic=BASIC Listing
+
+[Links]
+Basic=BASIC Listing
+
+[Paths+]
+Basic=reference/basic.html
+
+[Index:Reference:Reference]
+Changelog
+Basic
+Pokes
+
+[BasicBody]
+#HTML^<p>The Wild Bunch is mostly Sinclair BASIC. The commercial tape stores the
+program as a single <code>PROGRAM</code> block with a one-line stub that
+<code>LIST</code> will show, then the real tokenised program with line 15's
+header deliberately corrupted so listing stops. This page is a recovered
+<code>LIST</code> of that program (507 lines). Line 15 is
+reconstructed from the prompt text and the pre-production tape; every other
+line is taken from the post-load snapshot.</p>
+<p>Line 1 enters the machine-code stub with
+<code>RANDOMIZE USR (VARS-116)</code>. The digits in the line say
+<code>140</code>, but the hidden floating-point value is <code>116</code>.
+In this snapshot that is #R$E933. The tap2sna start address
+#R$E973 sits further into the same stub. Game logic, text and data are
+the BASIC below; the stub holds graphics helpers and the USR entry.</p>
+<pre class="basic" style="white-space:pre; overflow:auto; font-size:12px; line-height:1.35">
+   1 RANDOMIZE USR ((PEEK 23627)+((PEEK 23628)*256)-116)
+  15 PRINT &amp;quot;WHAT NAME DO YOU GO BY?&amp;quot;: INPUT &amp;quot;ENTER NAME &amp;quot;; LINE N$: IF N$=&amp;quot;&amp;quot; THEN GO TO VAL &amp;quot;15&amp;quot;
+  20 BEEP .4,-10: CLS : PRINT AT 8,3;&amp;quot;ENTER LEVEL OF DIFFICULTY&amp;quot;: INPUT &amp;quot; LEVEL 1,2 OR 3 &amp;quot;; LINE E$: LET E$=E$+&amp;quot; &amp;quot;: IF CODE E$(1)&amp;gt;51 OR CODE E$(1)&amp;lt;49 THEN GO TO VAL &amp;quot;20&amp;quot;
+  22 LET LV=VAL E$+U
+  30 BEEP .5,30: CLS : PRINT AT 10,10;&amp;quot;PLEASE WAIT&amp;quot;: LET LM=3: LET SC=O: LET JB=O: LET L=6: LET CS=1500: LET DT=O: RANDOMIZE O: DIM T(5,5): RESTORE 9110: FOR N=U TO 5: FOR A=U TO 5: READ S: LET T(N,A)=S: NEXT A: NEXT N
+  40 LET CS=1450: DIM U(5,INT PI): RESTORE VAL &amp;quot;9120&amp;quot;: FOR N=U TO 5: FOR A=U TO 3: READ S: LET U(N,A)=S: NEXT A: NEXT N
+  50 DIM K$(16,20): RESTORE VAL &amp;quot;9140&amp;quot;: FOR N=U TO 16: READ K$(N): NEXT N
+  60 DIM K(16): RESTORE VAL &amp;quot;9145&amp;quot;: FOR N=U TO 16: READ K(N): NEXT N:
+  70 DIM I(16): FOR N=U TO 16: LET I(N)=O: NEXT N: LET I(6)=5: LET I(4)=U: DIM R(5): RESTORE VAL &amp;quot;9095&amp;quot;: FOR N=U TO 5: READ R(N): NEXT N: DIM D$(5,19)
+ 115 FOR N=U TO 5: RESTORE VAL &amp;quot;9000&amp;quot;+INT (RND*12)+U: READ l$: LET D$(n)=L$
+ 135 FOR A=U TO N: IF A=N THEN GO TO VAL &amp;quot;145&amp;quot;
+ 140 IF D$(N)=D$(A) THEN GO TO VAL &amp;quot;115&amp;quot;
+ 145 NEXT A: NEXT N
+ 155 DIM B$(5,15): RESTORE VAL &amp;quot;9015&amp;quot;: FOR N=U TO 5: READ B$(N): NEXT N
+ 165 DIM V(5): FOR N=U TO 5: LET V(N)=R: NEXT N
+ 170 LET MB=INT (RND*5)+U
+ 180 DIM T$(5,14): RESTORE VAL &amp;quot;9045&amp;quot;: FOR N=U TO 5: READ T$(N): NEXT N: GO TO VAL &amp;quot;8900&amp;quot;
+ 310 BORDER U: PAPER R: CLS : LET S$=&amp;quot;                            &amp;quot;: FOR N=U TO 30: PRINT AT U,N;&amp;quot;~&amp;quot;;AT 11,N;&amp;quot;~&amp;quot;: NEXT N: FOR N=R TO 10: PRINT AT N,U;&amp;quot;~&amp;quot;; PAPER 6;S$; PAPER R;&amp;quot;~&amp;quot;: NEXT N
+ 315 PRINT PAPER 6;AT 7,6;&amp;quot;_&amp;quot;;AT 2,9;&amp;quot;4&amp;quot;;AT 5,3;&amp;quot;5   _&amp;quot;;AT 6,9;&amp;quot;_   3&amp;quot;;TAB 21;&amp;quot;1&amp;quot;;AT 9,10;&amp;quot;2&amp;quot;;AT 3,27;&amp;quot;N&amp;quot;;AT 4,27;&amp;quot;↑&amp;quot;
+ 320 PLOT 92,136: DRAW 5,9: DRAW INT PI,-5: PLOT 97,136: DRAW 5,7: DRAW 5,-7: PLOT 105,139: DRAW INT PI,6: DRAW 5,-9: PLOT 111,140: DRAW 5,4: DRAW 6,-8: CIRCLE 219,144,12
+ 325 PRINT AT 13,R;&amp;quot;1=DRY GULCH : 2=DODGE CITY&amp;quot;;TAB R;&amp;quot;3=NUGGET CITY : 4=BULLETVILLE&amp;quot;;TAB 8;&amp;quot;5=DEADMANS CREEK&amp;quot;;AT 16,7;&amp;quot;------------------&amp;quot;
+ 330 RESTORE VAL &amp;quot;9050&amp;quot;: FOR N=U TO 5: READ Z: READ X: BEEP Z/4,X+3: NEXT N: RETURN
+ 480 GO SUB VAL &amp;quot;7500&amp;quot;
+ 485 IF UM=TN THEN GO TO VAL &amp;quot;487&amp;quot;
+ 486 GO TO VAL &amp;quot;500&amp;quot;
+ 487 BORDER PI: PAPER PI: CLS : PRINT : PRINT : PRINT : PRINT &amp;quot;YOU HAVE ENTERED &amp;quot;;T$(TN): PRINT : PRINT &amp;quot;AGENT CHARLES A.SIRINGO OF THE&amp;quot;: PRINT : PRINT &amp;quot;PINKERTON DETECTIVE AGENCY&amp;quot;: PRINT : PRINT &amp;quot;IS WAITING FOR YOU.&amp;quot;: PRINT : PRINT &amp;quot;HE ARRESTS YOU ON A CHARGE OF&amp;quot;: PRINT : PRINT &amp;quot;MURDER. YOU ARE GOING TO PRISON&amp;quot;: PRINT : PRINT &amp;quot;FOR A LONG LONG TIME....&amp;quot;: GO TO VAL &amp;quot;2725&amp;quot;
+ 505 BORDER INT PI: PAPER U: CLS : PRINT PAPER 4;AT U,INT PI;;&amp;quot;YOU ARE IN &amp;quot;;T$(TN): PRINT : PRINT TAB INT PI; PAPER U;&amp;quot;YOU CAN DO THE FOLLOWING:-&amp;quot;
+ 510 PRINT AT 6,4;&amp;quot;1-GO TO SALOON&amp;quot;,,TAB 4;&amp;quot;2-GO TO SHERIFFS&amp;#x27; OFFICE&amp;quot;,,TAB 4;&amp;quot;3-GO TO STORE&amp;quot;,,TAB 4;&amp;quot;4-GO TO TELEGRAPH OFFICE&amp;quot;,,TAB 4;&amp;quot;5-MOVE ON&amp;quot;,,,TAB 4;&amp;quot;6-STATUS&amp;quot;;AT 19,2;&amp;quot;PRESS NUMBER OF YOUR CHOICE&amp;quot;
+ 520 BEEP .001,45: IF INKEY$=&amp;quot;1&amp;quot; THEN GO TO VAL &amp;quot;1000&amp;quot;
+ 521 IF INKEY$=&amp;quot;2&amp;quot; THEN GO TO VAL &amp;quot;3000&amp;quot;
+ 522 IF INKEY$=&amp;quot;3&amp;quot; THEN GO TO VAL &amp;quot;7666&amp;quot;
+ 523 IF INKEY$=&amp;quot;4&amp;quot; THEN GO TO VAL &amp;quot;2500&amp;quot;
+ 524 IF INKEY$=&amp;quot;5&amp;quot; THEN GO TO VAL &amp;quot;6000&amp;quot;
+ 525 IF INKEY$=&amp;quot;6&amp;quot; THEN GO TO VAL &amp;quot;7800&amp;quot;
+ 535 BEEP .005,0: GO TO VAL &amp;quot;520&amp;quot;
+1010 BORDER U: PAPER R: CLS : PRINT PAPER 4;AT R,5;&amp;quot;YOU&amp;#x27;RE IN THE SALOON&amp;quot;; PAPER R;AT 4,7;&amp;quot;DO YOU WANT TO:-&amp;quot;
+1015 PRINT AT 6,6;&amp;quot;1) DRINK&amp;quot;: PRINT : PRINT TAB 6;&amp;quot;2) PLAY POKER&amp;quot;: PRINT : PRINT TAB 6;&amp;quot;3) LOOK AROUND&amp;quot;: PRINT : PRINT TAB 6;&amp;quot;4) LEAVE&amp;quot;;AT 15,R;&amp;quot;PRESS NUMBER OF YOUR CHOICE&amp;quot;: BEEP .3,20
+1020 BEEP .01,PI: IF INKEY$=&amp;quot;1&amp;quot; THEN GO TO VAL &amp;quot;1150&amp;quot;
+1021 IF INKEY$=&amp;quot;2&amp;quot; THEN GO TO VAL &amp;quot;1250&amp;quot;
+1022 IF INKEY$=&amp;quot;3&amp;quot; THEN GO TO VAL &amp;quot;2000&amp;quot;
+1024 IF INKEY$=&amp;quot;4&amp;quot; THEN GO TO VAL &amp;quot;500&amp;quot;
+1030 BEEP .005,-PI: GO TO VAL &amp;quot;1020&amp;quot;
+1150 PAPER 4: CLS : PRINT AT 4,6;&amp;quot;YOU ARE AT THE BAR&amp;quot;: PRINT : PRINT : PRINT : PRINT TAB 5;&amp;quot;WHAT WILL YOU HAVE ?&amp;quot;: PRINT : PRINT TAB 6;&amp;quot;1) BEER  ($1)&amp;quot;: PRINT : PRINT TAB 6;&amp;quot;2) RED EYE  ($2)&amp;quot;
+1155 BEEP .6,25: INPUT &amp;quot;ENTER (1 OR 2) &amp;quot;; LINE E$: LET E$=E$+&amp;quot; &amp;quot;: IF CODE E$(U)=49 OR CODE E$(U)=50 THEN LET H=VAL E$(U): GO TO VAL &amp;quot;1160&amp;quot;
+1157 GO TO VAL &amp;quot;1155&amp;quot;
+1160 IF MU&amp;lt;H THEN PRINT : PRINT TAB 5;&amp;quot;YOU CAN&amp;#x27;T AFFORD IT!!&amp;quot;: GO SUB VAL &amp;quot;9231&amp;quot;: GO TO VAL &amp;quot;1000&amp;quot;
+1165 IF H=U THEN LET IS=IS+U: LET CS=CS+10: LET MU=MU-H: PRINT : PRINT TAB 6;&amp;quot;ONE BEER COMING UP&amp;quot;: PRINT : PRINT &amp;quot;THAT&amp;#x27;S WORTH 10 STRENGTH POINTS&amp;quot;: GO TO VAL &amp;quot;1175&amp;quot;
+1170 IF H=R THEN LET IS=IS+INT PI: LET CS=CS+25: LET MU=MU-H: PRINT : PRINT TAB 4;&amp;quot;ONE RED EYE COMING UP&amp;quot;: PRINT : PRINT &amp;quot;THAT&amp;#x27;S WORTH 25 STRENGTH POINTS&amp;quot;
+1175 FOR N=-10 TO 10: BEEP .1,N: BEEP .1,N+U: NEXT N
+1180 IF IS&amp;gt;LM THEN CLS : LET CS=CS-IS*20: PRINT AT 6,INT PI;&amp;quot;YOU FEEL DIZZY AND STUMBLE&amp;quot;: PRINT : PRINT &amp;quot;   INTO A LONESOME COWBOY,WHO&amp;quot;: PRINT : PRINT &amp;quot;   HITS YOU VERY HARD,YOUR&amp;quot;: PRINT : PRINT &amp;quot;   STRENGTH IS &amp;quot;;CS: GO TO VAL &amp;quot;1190&amp;quot;
+1185 GO TO VAL &amp;quot;1000&amp;quot;
+1190 FOR N=U TO 50: BEEP .1,RND*50: NEXT N: IF CS&amp;lt;=0 THEN GO TO VAL &amp;quot;2435&amp;quot;
+1195 GO TO VAL &amp;quot;500&amp;quot;
+1200 BEEP .1,5: BEEP .1,10: BEEP .1,15: INPUT &amp;quot;  PRESS ENTER TO CONTINUE &amp;quot;; LINE H$: RETURN
+1250 BORDER 4: PAPER 4: CLS : IF MU&amp;lt;3 THEN PRINT AT 11,5;&amp;quot;YOU CAN&amp;#x27;T AFFORD IT&amp;quot;: GO SUB VAL &amp;quot;9231&amp;quot;: GO TO VAL &amp;quot;1000&amp;quot;
+1260 IF MU&amp;gt;120 THEN PRINT AT 7,8;&amp;quot;THERE IS NO ONE&amp;quot;: PRINT : PRINT TAB 6;&amp;quot;TO PLAY POKER WITH.&amp;quot;: FOR N=U TO 30: BEEP .05,N*-U: BEEP .02,N: NEXT N: GO TO VAL &amp;quot;1000&amp;quot;
+1265 PRINT AT 6,4;&amp;quot;YOU PLAY POKER WITH&amp;quot;: PRINT : PRINT TAB 4;&amp;quot;THE TOWN GAMBLER....&amp;quot;: BEEP .2,U: BEEP .4,10: GO SUB VAL &amp;quot;1200&amp;quot;
+1270 LET S$=&amp;quot;                               &amp;quot;: LET C=INT (RND*3)+U
+1275 LET YH=INT (RND*16)+9060: LET GH=INT (RND*16)+9060: IF C=U THEN LET GH=GH+R: IF GH&amp;gt;9075 THEN LET GH=9075
+1290 IF GH=YH THEN GO TO VAL &amp;quot;1275&amp;quot;
+1305 LET POT=R: LET MU=MU-U:: RESTORE YH: READ Y$: RESTORE GH: READ G$
+1310 CLS : PRINT AT R,7;&amp;quot;THE ANTE IS $1.00&amp;quot;;AT 4,12;&amp;quot;POT=$&amp;quot;;POT
+1315 PRINT AT 6,R;&amp;quot;YOUR HAND:&amp;quot;;AT 8,12;Y$
+1320 PRINT AT 10,R;&amp;quot;YOU HAVE $&amp;quot;;INT MU;TAB 17;&amp;quot;:LAST BET $0&amp;quot;
+1325 LET BL=RND*10: IF GH&amp;gt;9063 OR BL&amp;gt;6 THEN GO TO 1350
+1330 PRINT AT 17,R;&amp;quot;GAMBLER THROWS IN HIS CARDS&amp;quot;: LET MU=MU+POT: GO SUB VAL &amp;quot;1200&amp;quot;: GO SUB VAL &amp;quot;1500&amp;quot;: GO TO VAL &amp;quot;1490&amp;quot;
+1350 LET NB=INT (RND*4)+R: IF GH&amp;gt;9073 THEN LET NB=5
+1355 FOR N=U TO NB
+1360 IF N=U THEN LET BET=R: PAUSE 150: PRINT AT 13,4;&amp;quot;THE GAMBLER BETS $&amp;quot;;BET: LET POT=POT+BET: GO SUB VAL &amp;quot;1510&amp;quot;: GO SUB VAL &amp;quot;1200&amp;quot;: GO SUB VAL &amp;quot;1500&amp;quot;: GO TO VAL &amp;quot;1435&amp;quot;
+1363 IF N=NB AND BL&amp;gt;6 THEN GO TO VAL &amp;quot;1330&amp;quot;
+1365 IF N=NB THEN LET POT=POT+BET: PRINT AT 17,R;&amp;quot;THE GAMBLER SEES YOU&amp;quot;: GO SUB VAL &amp;quot;1510&amp;quot;: GO SUB VAL &amp;quot;1200&amp;quot;: GO TO VAL &amp;quot;1475&amp;quot;
+1370 IF BL&amp;gt;6 THEN GO TO VAL &amp;quot;1380&amp;quot;
+1375 IF I$=&amp;quot;C&amp;quot; THEN LET POT=POT+BET: PRINT AT 17,INT PI;&amp;quot;THE GAMBLER CALLS YOUR BET&amp;quot;: GO SUB VAL &amp;quot;1510&amp;quot;: GO SUB VAL &amp;quot;1200&amp;quot;: GO TO VAL &amp;quot;1430&amp;quot;
+1380 LET BET=BET+INT (RND*10)+U: LET POT=POT+BET: PRINT AT 17,4;&amp;quot;HE RAISES THE BET TO $&amp;quot;;BET: GO SUB VAL &amp;quot;1510&amp;quot;: GO SUB VAL &amp;quot;1200&amp;quot;: GO TO VAL &amp;quot;1430&amp;quot;
+1430 IF INT MU-BET&amp;lt;O THEN GO TO VAL &amp;quot;1470&amp;quot;
+1435 GO SUB VAL &amp;quot;1500&amp;quot;: PRINT AT 12,INT PI;&amp;quot;WHAT DO YOU WANT TO DO?&amp;quot;;AT 14,8;&amp;quot;A)THROW IN HAND&amp;quot;;TAB 8;&amp;quot;B)CALL HIS BET&amp;quot;;TAB 8;&amp;quot;C)RAISE&amp;quot;;TAB 8;&amp;quot;D)SEE HIM&amp;quot;
+1440 BEEP .4,10: INPUT &amp;quot;      ENTER LETTER &amp;quot;; LINE I$: BEEP .3,30: BEEP .2,20
+1445 IF I$=&amp;quot;A&amp;quot; THEN GO SUB VAL &amp;quot;1500&amp;quot;: GO TO VAL &amp;quot;1490&amp;quot;
+1450 IF I$=&amp;quot;B&amp;quot; THEN LET MU=MU-BET: LET POT=POT+BET: GO SUB VAL &amp;quot;1500&amp;quot;: GO SUB VAL &amp;quot;1510&amp;quot;: PRINT AT 17,10;&amp;quot;OK. YOU CALL&amp;quot;: PAUSE 150: GO TO VAL &amp;quot;1469&amp;quot;
+1455 IF I$=&amp;quot;D&amp;quot; THEN LET MU=MU-BET: LET POT=POT+BET: GO TO VAL &amp;quot;1475&amp;quot;
+1457 IF I$=&amp;quot;C&amp;quot; AND MU&amp;gt;=BET+U THEN PRINT AT 19,R;&amp;quot;WHAT DO YOU BET? (MIN.$&amp;quot;;BET+U;&amp;quot;)&amp;quot;: INPUT &amp;quot;     ENTER AMOUNT &amp;quot;; LINE E$: LET E$=E$+&amp;quot; &amp;quot;: IF CODE E$(U)&amp;lt;58 AND CODE E$(U)&amp;gt;48 THEN GO TO VAL &amp;quot;1462&amp;quot;
+1460 IF I$=&amp;quot;C&amp;quot; THEN GO TO 1457
+1461 GO TO VAL &amp;quot;1440&amp;quot;
+1462 LET RA=VAL E$: IF RA&amp;lt;BET+U THEN GO TO VAL &amp;quot;1460&amp;quot;
+1463 IF RA&amp;gt;MU THEN GO TO VAL &amp;quot;1460&amp;quot;
+1464 GO SUB VAL &amp;quot;1500&amp;quot;: LET MU=MU-RA: LET POT=POT+RA: LET BET=RA: PRINT AT 17,INT PI;&amp;quot;YOU RAISE THE BET TO $&amp;quot;;BET: GO SUB VAL &amp;quot;1510&amp;quot;: PAUSE 150: GO SUB VAL &amp;quot;1500&amp;quot;: NEXT N
+1465 GO TO VAL &amp;quot;1440&amp;quot;
+1467 PRINT AT 17,R;&amp;quot;YOU CAN&amp;#x27;T AFFORD TO RAISE.&amp;quot;: GO SUB VAL &amp;quot;9230&amp;quot;: GO TO VAL &amp;quot;1435&amp;quot;
+1469 NEXT N
+1470 GO SUB VAL &amp;quot;1500&amp;quot;: PRINT AT 17,O;&amp;quot;YOU CAN&amp;#x27;T AFFORD TO PLAY ANYMORE&amp;quot;: GO SUB VAL &amp;quot;9230&amp;quot;: GO SUB VAL &amp;quot;1200&amp;quot;: GO TO VAL &amp;quot;1000&amp;quot;
+1475 GO SUB VAL &amp;quot;1500&amp;quot;: IF GH&amp;gt;YH THEN PRINT AT 12,R;&amp;quot;GAMBLER&amp;#x27;S HAND:&amp;quot;: PRINT : PRINT TAB 12;G$;AT 17,2;&amp;quot;THE GAMBLER WINS THAT ONE&amp;quot;: GO SUB VAL &amp;quot;1510&amp;quot;: GO SUB VAL &amp;quot;1200&amp;quot;: GO SUB VAL &amp;quot;1500&amp;quot;: GO TO VAL &amp;quot;1490&amp;quot;
+1480 IF GH&amp;lt;YH THEN LET MU=MU+POT: GO SUB VAL &amp;quot;1510&amp;quot;: PRINT AT 12,R;&amp;quot;GAMBLER&amp;#x27;S HAND:&amp;quot;: PRINT : PRINT TAB 12;G$;AT 17,8;&amp;quot;YOU WIN THAT ONE&amp;quot;: GO SUB VAL &amp;quot;1200&amp;quot;: GO SUB VAL &amp;quot;1500&amp;quot;
+1490 IF MU&amp;gt;120 THEN CLS : PRINT AT 10,6;&amp;quot;THE GAMBLER QUITS!!&amp;quot;: GO SUB VAL &amp;quot;1200&amp;quot;: GO TO VAL &amp;quot;1000&amp;quot;
+1491 PRINT AT 16,R;&amp;quot;WOULD YOU LIKE ANOTHER HAND?&amp;quot;: PRINT : PRINT TAB 13;&amp;quot;(Y/N)&amp;quot;
+1492 BEEP .03,U: IF INKEY$=&amp;quot;Y&amp;quot; THEN GO TO VAL &amp;quot;1498&amp;quot;
+1495 IF INKEY$=&amp;quot;N&amp;quot; THEN GO TO VAL &amp;quot;1000&amp;quot;
+1497 BEEP .01,O: GO TO VAL &amp;quot;1492&amp;quot;
+1498 IF MU&amp;lt;INT PI THEN GO TO VAL &amp;quot;1250&amp;quot;
+1499 GO TO VAL &amp;quot;1275&amp;quot;
+1500 FOR K=12 TO 21: PRINT AT K,0;S$: NEXT K: RETURN
+1510 PRINT AT 4,17;POT;AT 10,12;INT MU;&amp;quot; &amp;quot;;AT 10,28;BET: RETURN
+2001 INK 9: PAPER INT PI: CLS : IF DT=U THEN PRINT AT 10,R;&amp;quot;THERE&amp;#x27;S NOBODY SPECIAL HERE&amp;quot;: PAUSE 150: GO TO VAL &amp;quot;1000&amp;quot;
+2010 IF RND*LV&amp;lt;U THEN GO TO VAL &amp;quot;2100&amp;quot;
+2015 RESTORE 9000+INT (RND*12)+U: READ J$
+2025 FOR N=U TO 5
+2030 IF J$=D$(N) THEN GO TO VAL &amp;quot;2015&amp;quot;
+2035 NEXT N: LET BG=U
+2040 PRINT AT 5,O;&amp;quot;A MAN WALKS INTO THE SALOON WITH&amp;quot;: PRINT : PRINT TAB 3;J$
+2045 LET DT=U: GO TO 2200
+2100 LET BG=O: LET M=INT (RND*5)+U
+2110 IF V(M)&amp;lt;R THEN GO TO 2100
+2112 IF M=MB AND V(U)+V(R)+V(3)+V(4)+V(5)&amp;gt;6 THEN GO TO 2100
+2115 LET J$=D$(M): GO TO 2040
+2200 PRINT INK 6;AT 12,U;&amp;quot;DO YOU WANT TO CHALLENGE HIM ?&amp;quot;: PRINT : PRINT TAB 13;&amp;quot;(Y/N)&amp;quot;
+2210 IF INKEY$=&amp;quot;Y&amp;quot; THEN GO TO VAL &amp;quot;2300&amp;quot;
+2215 BEEP .01,20: BEEP .01,30
+2220 IF INKEY$=&amp;quot;N&amp;quot; THEN LET DT=U: GO TO VAL &amp;quot;1000&amp;quot;
+2230 GO TO VAL &amp;quot;2210&amp;quot;
+2300 CLS : PRINT AT 4,INT PI;&amp;quot;DO YOU THINK HE IS :-&amp;quot;: PRINT : PRINT &amp;quot;   1) &amp;quot;;B$(U): PRINT : PRINT &amp;quot;   2) &amp;quot;;B$(R): PRINT : PRINT &amp;quot;   3) &amp;quot;;B$(3): PRINT : PRINT &amp;quot;   4) &amp;quot;;B$(4): PRINT : PRINT &amp;quot;   5) &amp;quot;;B$(5): PRINT : PRINT &amp;quot;   ENTER NUMBER OF CHOICE.&amp;quot;
+2310 BEEP .2,10: BEEP .3,-10: INPUT LINE E$: LET E$=E$+&amp;quot; &amp;quot;: IF CODE E$(U)&amp;lt;49 OR CODE E$(U)&amp;gt;53 THEN GO TO VAL &amp;quot;2310&amp;quot;
+2315 LET A=VAL E$: IF A&amp;lt;U THEN GO TO VAL &amp;quot;2310&amp;quot;
+2320 IF A&amp;gt;5 THEN GO TO VAL &amp;quot;2310&amp;quot;
+2330 BORDER O: CLS : PRINT AT 6,4;&amp;quot;DO YOU WANT TO :-&amp;quot;: PRINT : PRINT TAB 5;&amp;quot;1) TAKE HIM PRISONER&amp;quot;: PRINT : PRINT TAB 5;&amp;quot;2) HAVE A GUN FIGHT&amp;quot;: PRINT : PRINT : PRINT TAB 9;&amp;quot;PRESS 1 OR 2&amp;quot;
+2335 IF INKEY$=&amp;quot;1&amp;quot; THEN LET E$=&amp;quot;CAPTURED &amp;quot;: LET I$=&amp;quot;LAUGHS&amp;quot;: LET TP=U: GO TO VAL &amp;quot;2400&amp;quot;
+2337 BEEP .01,PI: BEEP .01,PI*PI
+2340 IF INKEY$=&amp;quot;2&amp;quot; THEN LET E$=&amp;quot;KILLED &amp;quot;: LET I$=&amp;quot;FROWNS&amp;quot;: LET TP=O: LET GF=U: GO TO VAL &amp;quot;5000&amp;quot;
+2345 GO TO VAL &amp;quot;2335&amp;quot;
+2400 BORDER 6: CLS : PRINT AT 7,R;&amp;quot;YOU SAY;&amp;quot;&amp;quot;I&amp;#x27;M TAKING YOU IN.&amp;quot;&amp;quot;&amp;quot;
+2407 IF I(4)+I(5)+I(7)&amp;lt;=O THEN PRINT AT 10,INT PI;&amp;quot;THE MAN SEES THAT YOU HAVE&amp;quot;: PRINT : PRINT &amp;quot;   NO GUN AND RUNS OFF&amp;quot;: LET SC=SC-50: GO TO VAL &amp;quot;2422&amp;quot;
+2410 IF BG=U THEN GO TO VAL &amp;quot;2450&amp;quot;
+2414 IF RND*5&amp;gt;1.7 THEN GO TO VAL &amp;quot;2450&amp;quot;
+2415 PRINT AT 10,INT PI;&amp;quot;BUT,THE MAN THROWS A BOTTLE&amp;quot;: PRINT : PRINT &amp;quot;   AT YOU AND RUNS OFF.&amp;quot;: LET CS=CS-50
+2422 FOR N=18 TO 30: BEEP .3,N: BEEP .2,N*-U: NEXT N: IF CS&amp;lt;=O THEN GO TO VAL &amp;quot;2435&amp;quot;
+2430 GO TO VAL &amp;quot;1000&amp;quot;
+2435 BORDER O: PAPER O: CLS : PRINT AT 10,O;&amp;quot;YOU HAVE DIED FROM YOUR INJURIES&amp;quot;:
+2440 RESTORE VAL &amp;quot;9100&amp;quot;: FOR N=U TO 11: READ M: READ W: BEEP M/3,W: NEXT N: LET M$=&amp;quot;YOU RAN OUT OF STRENGTH!&amp;quot;: GO TO VAL &amp;quot;8500&amp;quot;
+2450 PRINT AT 11,1;&amp;quot;YOU TAKE THE MAN,AT GUN POINT&amp;quot;: PRINT : PRINT &amp;quot;    TO THE SHERIFF&amp;#x27;S OFFICE&amp;quot;: GO SUB VAL &amp;quot;2455&amp;quot;: GO TO VAL &amp;quot;2460&amp;quot;
+2455 RESTORE VAL &amp;quot;9080&amp;quot;: FOR N=U TO 10: READ K: READ G: BEEP K/3,G: NEXT N: RETURN
+2460 BORDER 5: CLS : PRINT AT 4,U;&amp;quot;YOU TELL THE SHERIFF YOU HAVE&amp;quot;: PRINT : PRINT TAB 4;E$;B$(A)
+2465 IF D$(A)=J$ AND TP=U THEN GO TO VAL &amp;quot;2495&amp;quot;
+2466 IF D$(A)=J$ AND GF=U THEN GO TO VAL &amp;quot;2700&amp;quot;
+2467 PRINT AT 9,R;&amp;quot;THE SHERIFF &amp;quot;;I$;&amp;quot; AND SAYS;&amp;quot;: PRINT : PRINT &amp;quot;  &amp;quot;&amp;quot;THAT&amp;#x27;S NOT &amp;quot;;B$(A);&amp;quot;.&amp;quot;&amp;quot;&amp;quot;
+2468 IF V(A)=U THEN LET C$=&amp;quot;HE HAS BEEN PUT IN JAIL&amp;quot;
+2469 IF V(A)=O THEN LET C$=&amp;quot;HE WAS KILLED&amp;quot;
+2470 IF D$(A)&amp;lt;&amp;gt;J$ THEN LET C$=&amp;quot;HE DOESN&amp;#x27;T FIT THE DESCRIPTION&amp;quot;
+2471 IF BG=U THEN RESTORE 9150+INT (RND*4)+U: READ Z$: PRINT AT 14,4;&amp;quot;&amp;quot;&amp;quot;THAT&amp;#x27;S &amp;quot;;Z$;&amp;quot;&amp;quot;&amp;quot;&amp;quot;: GO TO VAL &amp;quot;2480&amp;quot;
+2472 PRINT AT 14,R;C$
+2480 IF TP=U THEN PRINT AT 17,7;&amp;quot;HE LETS THE MAN GO&amp;quot;: GO SUB VAL &amp;quot;2482&amp;quot;: GO TO VAL &amp;quot;2483&amp;quot;
+2481 PRINT AT 17,7;&amp;quot;HE COVERS THE BODY&amp;quot;: GO SUB VAL &amp;quot;2482&amp;quot;: GO TO VAL &amp;quot;2720&amp;quot;
+2482 FOR N=50 TO -10 STEP -U: BEEP .1,N: BEEP .05,N/2: NEXT N: RETURN
+2483 CLS : IF MU&amp;lt;5 THEN LET W=MU: LET MU=O: GO TO VAL &amp;quot;2485&amp;quot;
+2484 LET W=INT (MU/10): LET MU=MU-W
+2485 PRINT AT 6,4;&amp;quot;THE SHERIFF FINES YOU $&amp;quot;;W: PRINT : PRINT TAB 4;&amp;quot;FOR WASTING HIS TIME THEN&amp;quot;: PRINT : PRINT TAB 4;&amp;quot;THROWS YOU OUT&amp;quot;
+2486 FOR N=30 TO -30 STEP -U: BEEP .05,N: BEEP .05,N-R: NEXT N: GO TO VAL &amp;quot;500&amp;quot;
+2495 PRINT AT 12,R;&amp;quot;THE SHERIFF AGREES AND PUTS&amp;quot;: PRINT : PRINT TAB 4;&amp;quot;HIM BEHIND BARS.&amp;quot;: PRINT : PRINT TAB R;&amp;quot;YOU RECEIVE $&amp;quot;;R(A);&amp;quot; REWARD&amp;quot;: LET V(A)=U: LET MU=MU+R(A): LET SC=SC+200: GO SUB VAL &amp;quot;2498&amp;quot;
+2496 IF B$(A)=B$(MB) THEN GO TO VAL &amp;quot;9600&amp;quot;
+2497 GO TO VAL &amp;quot;500&amp;quot;
+2498 RESTORE VAL &amp;quot;9085&amp;quot;: FOR N=U TO 18: READ K: READ H: BEEP K/5,H: NEXT N: RETURN
+2501 IF MU&amp;lt;=100 THEN LET BB=20: GO TO VAL &amp;quot;2550&amp;quot;
+2505 LET BB=20+INT (RND*50)+U
+2550 BORDER U: PAPER 5: CLS : PRINT AT 6,U;&amp;quot;YOU GO TO THE TELEGRAPH OFFICE&amp;quot;,,,&amp;quot; THE CLERK SAYS HE WILL SHOW&amp;quot;,,,&amp;quot; YOU THE LATEST TELEGRAPHS&amp;quot;,,,&amp;quot; FOR $&amp;quot;;BB;AT 16,6;&amp;quot;DO YOU AGREE ?(Y/N)&amp;quot;
+2555 BEEP .02,30: IF INKEY$=&amp;quot;N&amp;quot; THEN GO TO VAL &amp;quot;500&amp;quot;
+2560 IF INKEY$=&amp;quot;Y&amp;quot; THEN GO TO VAL &amp;quot;2570&amp;quot;
+2565 BEEP .02,-20: GO TO VAL &amp;quot;2555&amp;quot;
+2570 IF MU&amp;lt;BB THEN CLS : PRINT AT 8,0;&amp;quot;YOUR INTENTIONS ARE BIGGER THAN&amp;quot;,,,&amp;quot;YOUR WALLET.YOU DON&amp;#x27;T HAVE $&amp;quot;;BB: FOR N=-20 TO 25: BEEP .1,N: BEEP .05,N*-U: NEXT N: GO TO VAL &amp;quot;500&amp;quot;
+2575 LET MU=MU-BB
+2585 BORDER O: PAPER 7: CLS : PRINT AT 4,U;&amp;quot;TELEGRAPH FROM &amp;quot;;T$(UM);AT 8,3;&amp;quot;PINKERTON AGENT CHARLES A.&amp;quot;,,,&amp;quot;   SIRINGO ARRIVED TODAY IN&amp;quot;,,,&amp;quot;   SEARCH OF FUGITIVE KNOWN&amp;quot;,,,&amp;quot;   AS &amp;quot;;N$: INPUT &amp;quot;        PRESS ENTER&amp;quot;; LINE H$
+2590 IF JB&amp;lt;&amp;gt;O THEN GO SUB VAL &amp;quot;2610&amp;quot;
+2595 GO TO VAL &amp;quot;2620&amp;quot;
+2610 CLS : PRINT AT 4,4;&amp;quot;TELEGRAPH FROM KNOXVILLE&amp;quot;;AT 8,R;&amp;quot;THE OUTLAW &amp;quot;;B$(JB),,,&amp;quot;  ESCAPED FROM KNOXVILLE COUNTY&amp;quot;,,,&amp;quot;  JAIL.&amp;quot;,,,,&amp;quot;  REWARD FOR RECAPTURE $&amp;quot;;R(JB): INPUT &amp;quot;        PRESS ENTER&amp;quot;; LINE H$: LET JB=O: RETURN
+2620 LET X=INT (RND*12)+U
+2625 IF X&amp;lt;8 THEN GO TO VAL &amp;quot;500&amp;quot;
+2630 IF X=12 THEN LET W$=&amp;quot;UNION PACIFIC    RAILROAD CO.&amp;quot;: LET X$=&amp;quot;TRAIN&amp;quot;
+2631 IF X=11 THEN LET W$=&amp;quot;GREAT NORTHERN   RAILROAD CO.&amp;quot;: LET X$=&amp;quot;TRAIN&amp;quot;
+2632 IF X=10 THEN LET W$=&amp;quot;DENVER&amp;quot;: LET X$=&amp;quot;FIRST NATIONAL BANK&amp;quot;
+2633 IF X=9 THEN LET W$=&amp;quot;MONTPELIER,IDAHO&amp;quot;: LET X$=&amp;quot;FIRST NATIONAL BANK&amp;quot;
+2634 IF X=8 THEN LET W$=&amp;quot;WINNEMUCCA,NEVADA&amp;quot;: LET X$=&amp;quot;FIRST NATIONAL BANK&amp;quot;
+2635 CLS : PRINT AT 4,O;&amp;quot;TELEGRAPH FROM &amp;quot;;W$;AT 8,R;&amp;quot;WILD BUNCH CARRIED OUT RAID&amp;quot;,,,&amp;quot;  ON &amp;quot;;X$;AT 12,R;&amp;quot;REWARDS RAISED BY $50&amp;quot;: FOR N=U TO 5: LET R(N)=R(N)+50: NEXT N: INPUT &amp;quot;        PRESS ENTER&amp;quot;; LINE H$: GO TO 500
+2700 PRINT AT 12,2;&amp;quot;THE SHERIFF AGREES AND CALLS&amp;quot;: PRINT : PRINT &amp;quot;  THE UNDERTAKER.&amp;quot;: PRINT : PRINT &amp;quot;  YOU RECEIVE $&amp;quot;;R(A);&amp;quot; REWARD.&amp;quot;: LET MU=MU+R(A): LET SC=SC+500: LET V(A)=O: IF I(4)&amp;gt;O AND I(6)&amp;gt;O THEN LET I(6)=I(6)-U: GO SUB VAL &amp;quot;2498&amp;quot;: GO TO VAL &amp;quot;2710&amp;quot;
+2705 LET I(5)=I(5)-U: GO SUB VAL &amp;quot;2498&amp;quot;
+2710 IF B$(A)=B$(MB) THEN GO TO VAL &amp;quot;9700&amp;quot;
+2715 GO TO VAL &amp;quot;500&amp;quot;
+2720 BORDER 0: PAPER 0: CLS : PRINT AT 7,O;&amp;quot;HE ARRESTS YOU FOR MANSLAUGHTER&amp;quot;: PRINT : PRINT &amp;quot;YOU&amp;#x27;LL BE IN JAIL FOR QUITE A&amp;quot;: PRINT : PRINT &amp;quot;LONG TIME.....&amp;quot;
+2725 FOR N=7 TO -20 STEP -U: BEEP .2,N: BEEP .05,N+3: NEXT N: GO SUB VAL &amp;quot;9500&amp;quot;: GO TO VAL &amp;quot;9870&amp;quot;
+3000 BORDER R: PAPER INT PI: INK 9: CLS
+3005 BEEP .2,15: BEEP .25,-15: PRINT AT 6,5;&amp;quot;YOU GO TO THE SHERIFFS&amp;quot;: PRINT : PRINT TAB 5;&amp;quot;OFFICE TO LOOK AT THE&amp;quot;: PRINT : PRINT TAB 5;&amp;quot;LATEST WANTED POSTERS&amp;quot;: PRINT : PRINT TAB 5;&amp;quot;ON MEMBERS OF THE WILD&amp;quot;: PRINT : PRINT TAB 5;&amp;quot;BUNCH.&amp;quot;; FLASH U;AT 17,12;&amp;quot;ANY KEY&amp;quot;: FLASH O
+3010 IF INKEY$&amp;lt;&amp;gt;&amp;quot;&amp;quot; THEN GO TO VAL &amp;quot;7000&amp;quot;
+3020 BEEP .01,INT PI: BEEP .02,15
+3025 GO TO VAL &amp;quot;3010&amp;quot;
+4005 LET DT=O: LET JM=INT (RND*3)+U: LET UM=U(UM,JM)
+4035 LET R$=&amp;quot;-------------------------------&amp;quot;: LET HS=6: LET HL=O: BORDER 5: PAPER 5: CLS : PRINT &amp;quot;YOU START YOUR JOURNEY....&amp;quot;: IF I(U)&amp;lt;=O THEN LET G=G*R: PRINT : PRINT &amp;quot;BUT YOU HAVE NO HORSE SO THE&amp;quot;: PRINT &amp;quot;JOURNEY WILL TAKE &amp;quot;;G;&amp;quot; DAYS&amp;quot;: GO TO 4080
+4040 IF I(R)&amp;lt;=O THEN LET G=G+R: PRINT : PRINT &amp;quot;BUT YOU HAVE NO SADDLE SO THE&amp;quot;: PRINT &amp;quot;JOURNEY WILL TAKE &amp;quot;;G;&amp;quot; DAYS....&amp;quot;
+4080 LET JY=O: FOR N=U TO G: LET JY=JY+U: PRINT : PRINT &amp;quot;DAY &amp;quot;;JY;&amp;quot; OF JOURNEY&amp;quot;: GO SUB 4960
+4095 IF I(10)&amp;gt;=U THEN LET I(10)=I(10)-U
+4110 LET NN=INT (RND*R)+U: LET TS=O: LET DI=PI: LET OR=PI: LET MI=PI: FOR W=U TO NN: POKE 23692,255: LET FO=O: LET KK=INT (RND*12): IF KK=11 AND I(U)=U THEN GO SUB 4970: GO TO 4126
+4115 IF DE=U AND N=R OR DE=U AND N&amp;lt;&amp;gt;U AND N&amp;lt;=G-U THEN GO TO VAL &amp;quot;4130&amp;quot;
+4116 IF MT=U AND N=R OR MT=U AND N&amp;lt;&amp;gt;U AND N&amp;lt;=G-U THEN GO TO VAL &amp;quot;4140&amp;quot;
+4117 PRINT : PRINT &amp;quot;YOU ARE ON THE OPEN RANGE&amp;quot;: IF OR=PI THEN GO SUB VAL &amp;quot;4200&amp;quot;: LET OR=O
+4118 GO SUB VAL &amp;quot;4701&amp;quot;: IF KK=INT PI THEN LET F$=&amp;quot;BUFFALO&amp;quot;
+4119 IF KK=5 OR KK=6 THEN GO SUB VAL &amp;quot;4870&amp;quot;: GO TO VAL &amp;quot;4126&amp;quot;
+4120 IF KK=U THEN LET F$=&amp;quot;LONGHORN&amp;quot;
+4121 GO SUB VAL &amp;quot;4700&amp;quot;
+4122 PRINT : PRINT &amp;quot;A &amp;quot;;M$;&amp;quot;,&amp;quot;;U$;&amp;quot; &amp;quot;;F$: PRINT E$;&amp;quot; (STRENGTH &amp;quot;;BS;&amp;quot;)&amp;quot;: PRINT : PRINT &amp;quot;YOUR STRENGTH IS &amp;quot;;CS
+4123 GO SUB VAL &amp;quot;4950&amp;quot;: IF H$=&amp;quot;F&amp;quot; THEN GO SUB VAL &amp;quot;4730&amp;quot;
+4124 IF H$=&amp;quot;R&amp;quot; THEN GO SUB VAL &amp;quot;4780&amp;quot;
+4125 IF H$=&amp;quot;B&amp;quot; THEN GO SUB VAL &amp;quot;4795&amp;quot;: IF TS=PI THEN GO TO VAL &amp;quot;4123&amp;quot;
+4126 LET TS=O: BEEP .7,PI: PRINT : PRINT R$: NEXT W: PAUSE 100: NEXT N: GO TO VAL &amp;quot;480&amp;quot;
+4130 PRINT : PRINT &amp;quot;YOU&amp;#x27;RE IN THE DESERT&amp;quot;: IF DI=PI THEN GO SUB VAL &amp;quot;4200&amp;quot;: GO SUB VAL &amp;quot;4850&amp;quot;: GO SUB VAL &amp;quot;4845&amp;quot;: GO SUB VAL &amp;quot;4855&amp;quot;: GO SUB VAL &amp;quot;4990&amp;quot;
+4131 GO SUB VAL &amp;quot;4701&amp;quot;
+4133 IF KK=INT PI THEN LET F$=&amp;quot;SCORPION&amp;quot;
+4134 IF KK=U THEN LET F$=&amp;quot;RATTLE SNAKE&amp;quot;
+4135 IF KK=O THEN LET N=N-2: PRINT : PRINT &amp;quot;A SANDSTORM ADDS 2 DAYS&amp;quot;: PRINT &amp;quot;TO YOUR JOURNEY&amp;quot;: GO TO VAL &amp;quot;4126&amp;quot;
+4136 IF KK=5 OR KK=6 THEN GO SUB VAL &amp;quot;4870&amp;quot;: GO TO VAL &amp;quot;4126&amp;quot;
+4137 GO TO VAL &amp;quot;4121&amp;quot;
+4140 PRINT : PRINT &amp;quot;YOU&amp;#x27;RE IN THE MOUNTAINS&amp;quot;: IF MI=PI THEN GO SUB VAL &amp;quot;4200&amp;quot;: GO SUB VAL &amp;quot;4850&amp;quot;: GO SUB VAL &amp;quot;4845&amp;quot;: GO SUB VAL &amp;quot;4855&amp;quot;: GO SUB VAL &amp;quot;4975&amp;quot;: IF I(13)&amp;lt;=O OR I(15)&amp;lt;=O THEN GO SUB VAL &amp;quot;4860&amp;quot;: GO SUB VAL &amp;quot;4990&amp;quot;
+4142 IF KK=O THEN PRINT : PRINT &amp;quot;A ROCKFALL ADDS 2 DAYS&amp;quot;: PRINT &amp;quot;TO YOUR JOURNEY&amp;quot;: LET N=N-R: GO TO VAL &amp;quot;4126&amp;quot;
+4143 IF KK=5 OR KK=6 THEN GO SUB VAL &amp;quot;4870&amp;quot;: GO TO VAL &amp;quot;4126&amp;quot;
+4145 GO SUB VAL &amp;quot;4701&amp;quot;
+4147 IF KK=INT PI THEN LET F$=&amp;quot;MOUNTAIN LION&amp;quot;
+4148 IF KK=U THEN LET F$=&amp;quot;GRIZZLY BEAR&amp;quot;
+4149 GO TO VAL &amp;quot;4121&amp;quot;
+4200 IF I(10)&amp;lt;=O THEN LET CS=CS-20: PRINT : PRINT &amp;quot;YOU&amp;#x27;RE VERY HUNGRY&amp;quot;: GO SUB 4990: RETURN
+4700 RESTORE 9200: LET PK=INT (RND*5): FOR K=O TO PK: READ M$: NEXT K: RESTORE 9205: LET PK=INT (RND*5): FOR K=O TO PK: READ U$: NEXT K: RESTORE 9210: LET PK=INT (RND*6): FOR K=O TO PK: READ E$: NEXT K: LET BS=INT (RND*90)+11: RETURN
+4701 RESTORE VAL &amp;quot;9215&amp;quot;: LET PK=INT (RND*7): FOR K=O TO PK: READ F$: NEXT K: RETURN
+4710 LET J=O: LET JI=O: LET IJ=O: IF I(INT PI)=U AND I(5)&amp;gt;=U THEN LET J=INT (RND*20)+U: GO TO VAL &amp;quot;4712&amp;quot;
+4711 GO TO VAL &amp;quot;4714&amp;quot;
+4712 IF J&amp;gt;I(5) THEN LET J=I(5)
+4713 LET I(5)=I(5)-J
+4714 IF I(4)=U AND I(6)&amp;gt;=U THEN LET JI=INT (RND*20)+U: GO TO VAL &amp;quot;4716&amp;quot;
+4715 GO TO VAL &amp;quot;4718&amp;quot;
+4716 IF JI&amp;gt;I(6) THEN LET JI=I(6)
+4717 LET I(6)=I(6)-JI
+4718 IF I(7)=U AND I(8)&amp;gt;=U THEN LET IJ=INT (RND*20)+U: GO TO VAL &amp;quot;4720&amp;quot;
+4719 GO TO VAL &amp;quot;4722&amp;quot;
+4720 IF IJ&amp;gt;I(8) THEN LET IJ=I(8)
+4721 LET I(8)=I(8)-IJ
+4722 LET BU=IJ+JI+J: PRINT : PRINT &amp;quot;YOU USED &amp;quot;;BU;&amp;quot; BULLETS&amp;quot;: GO SUB VAL &amp;quot;4960&amp;quot;: RETURN
+4730 LET GS=O: IF I(3)=U THEN LET GS=GS+(INT (I(5)/20)*2)
+4732 IF I(4)=U THEN LET GS=GS+(INT (I(6)/30)*5)
+4734 IF I(7)=U THEN LET GS=GS+(INT (I(8)/30)*8)
+4736 IF I(9)=U THEN LET GS=GS+R
+4738 PRINT : PRINT &amp;quot;YOU HAVE &amp;quot;;CS;&amp;quot; STRENGTH&amp;quot;: PRINT &amp;quot;HOW MUCH WILL YOU USE ?&amp;quot;: GO SUB VAL &amp;quot;4960&amp;quot;: INPUT &amp;quot;ENTER AMOUNT &amp;quot;; LINE E$: LET E$=E$+&amp;quot; &amp;quot;: IF CODE E$(U)&amp;gt;47 AND CODE E$(U)&amp;lt;58 THEN GO TO VAL &amp;quot;4740&amp;quot;
+4739 GO TO VAL &amp;quot;4738&amp;quot;
+4740 LET K=VAL E$: IF K&amp;gt;CS THEN PRINT : PRINT &amp;quot;YOU DON&amp;#x27;T HAVE THAT MUCH&amp;quot;: GO TO VAL &amp;quot;4738&amp;quot;
+4742 IF K&amp;lt;10 THEN LET GS=O
+4744 LET CS=CS-K: LET K=K+GS: IF K&amp;gt;=BS*1.5 THEN PRINT : PRINT &amp;quot;YOU ANNIHILATED THAT ONE!&amp;quot;: LET SC=SC+BS: GO SUB VAL &amp;quot;4710&amp;quot;: GO SUB VAL &amp;quot;4990&amp;quot;: RETURN
+4746 IF K&amp;lt;BS THEN GO TO VAL &amp;quot;4750&amp;quot;
+4748 IF RND*9&amp;gt;PI THEN PRINT : PRINT &amp;quot;YOU MADE A MESS OF HIM!&amp;quot;: LET SC=SC+BS: GO SUB VAL &amp;quot;4710&amp;quot;: GO SUB VAL &amp;quot;4990&amp;quot;: RETURN
+4750 IF FO&amp;gt;O THEN PRINT : PRINT &amp;quot;YOU GOT HAMMERED THAT TIME!&amp;quot;: GO TO VAL &amp;quot;4760&amp;quot;
+4752 PRINT : PRINT &amp;quot;NOW THE &amp;quot;;F$;&amp;quot; IS ANNOYED&amp;quot;: LET FO=PI: GO SUB VAL &amp;quot;4710&amp;quot;: GO SUB VAL &amp;quot;4990&amp;quot;: GO TO VAL &amp;quot;4123&amp;quot;
+4760 IF F$=&amp;quot;BUFFALO&amp;quot; OR F$=&amp;quot;RATTLE SNAKE&amp;quot; OR F$=&amp;quot;SCORPION&amp;quot; OR F$=&amp;quot;VULTURE&amp;quot; OR F$=&amp;quot;LONGHORN&amp;quot; OR F$=&amp;quot;GRIZZLY BEAR&amp;quot; OR F$=&amp;quot;MOUNTAIN LION&amp;quot; THEN GO TO VAL &amp;quot;4790&amp;quot;
+4761 LET CU=O: FOR T=U TO 16: LET CU=CU+I(T): NEXT T: IF CU&amp;lt;=O AND MU&amp;lt;=4 THEN GO TO VAL &amp;quot;4770&amp;quot;
+4762 IF MU&amp;gt;=4 AND RND*5&amp;gt;4 THEN PRINT : PRINT &amp;quot;THE &amp;quot;;F$;&amp;quot; TAKES $&amp;quot;;INT (MU/2): LET MU=INT (MU/2): GO SUB VAL &amp;quot;4960&amp;quot;: RETURN
+4764 IF CU&amp;lt;=O THEN GO TO VAL &amp;quot;4762&amp;quot;
+4765 LET CU=INT (RND*16)+U: IF I(CU)&amp;lt;=O THEN GO TO VAL &amp;quot;4765&amp;quot;
+4767 LET I(CU)=O: PRINT : PRINT &amp;quot;THE &amp;quot;;F$;&amp;quot; TAKES YOUR&amp;quot;: PRINT K$(CU): GO SUB VAL &amp;quot;4960&amp;quot;: RETURN
+4770 PRINT : PRINT &amp;quot;THE &amp;quot;;F$;&amp;quot; LEAVES&amp;quot;: GO SUB VAL &amp;quot;4960&amp;quot;: RETURN
+4780 LET SC=SC-10: LET CS=CS-10: GO SUB VAL &amp;quot;4990&amp;quot;: IF I(U)&amp;gt;=U AND RND*8&amp;gt;5 THEN PRINT : PRINT &amp;quot;O.K YOU MADE IT&amp;quot;: RETURN
+4781 PRINT : PRINT &amp;quot;UNFORTUNATELY HE&amp;#x27;S A QUICK&amp;quot;: PRINT M$;&amp;quot;,&amp;quot;;U$;&amp;quot; &amp;quot;;F$: GO TO VAL &amp;quot;4123&amp;quot;
+4790 IF I(10)&amp;gt;O THEN LET I(10)=O: PRINT : PRINT &amp;quot;THE &amp;quot;;F$;&amp;quot;TAKES &amp;quot;: PRINT &amp;quot;YOUR FOOD&amp;quot;: GO SUB VAL &amp;quot;4960&amp;quot;: RETURN
+4791 IF I(11)&amp;gt;O THEN LET I(11)=O: PRINT &amp;quot;THE &amp;quot;;F$;&amp;quot; TAKES&amp;quot;: PRINT &amp;quot;YOUR HORSES FOOD&amp;quot;: GO SUB VAL &amp;quot;4960&amp;quot;: RETURN
+4792 IF I(12)&amp;gt;O AND DE=U THEN LET I(12)=O: PRINT : PRINT &amp;quot;THE &amp;quot;;F$;&amp;quot; TAKES&amp;quot;: PRINT &amp;quot;YOUR WATER&amp;quot;: GO SUB VAL &amp;quot;4960&amp;quot;: RETURN
+4793 GO SUB VAL &amp;quot;4990&amp;quot;: PRINT : PRINT &amp;quot;THE &amp;quot;;F$;&amp;quot; ATTACKS AGAIN&amp;quot;: GO TO VAL &amp;quot;4123&amp;quot;
+4795 IF TS=PI THEN GO TO VAL &amp;quot;4805&amp;quot;
+4796 LET BB=INT (RND*50)+U: LET BF=O: FOR T=16 TO U STEP -U: LET BF=I(T)*K(T)
+4797 IF T=5 OR T=6 OR T=8 THEN LET BF=BF/50
+4798 IF BF&amp;gt;=BB THEN LET BF=T: GO TO VAL &amp;quot;4805&amp;quot;
+4799 LET BF=T
+4800 NEXT T
+4805 IF MU&amp;lt;=O THEN PRINT : PRINT &amp;quot;YOU HAVE NO MONEY&amp;quot;: LET TS=PI: RETURN
+4808 PRINT : PRINT &amp;quot;YOU HAVE $&amp;quot;;MU: PRINT &amp;quot;HOW MUCH DO YOU OFFER?&amp;quot;: BEEP .5,20: INPUT &amp;quot;ENTER AMOUNT &amp;quot;; LINE E$: LET E$=E$+&amp;quot; &amp;quot;: IF CODE E$(U)&amp;gt;47 AND CODE E$(U)&amp;lt;57 THEN GO TO VAL &amp;quot;4810&amp;quot;
+4809 GO TO VAL &amp;quot;4808&amp;quot;
+4810 LET YB=VAL E$: IF YB&amp;gt;MU THEN GO TO VAL &amp;quot;4808&amp;quot;
+4812 IF F$=&amp;quot;BUFFALO&amp;quot; OR F$=&amp;quot;RATTLE SNAKE&amp;quot; OR F$=&amp;quot;SCORPION&amp;quot; OR F$=&amp;quot;VULTURE&amp;quot; OR F$=&amp;quot;LONGHORN&amp;quot; OR F$=&amp;quot;GRIZZLY BEAR&amp;quot; OR F$=&amp;quot;MOUNTAIN LION&amp;quot; THEN PRINT : PRINT &amp;quot;WHAT IS A &amp;quot;;F$;&amp;quot; GOING&amp;quot;: PRINT &amp;quot;TO DO WITH $&amp;quot;;YB;&amp;quot; ?&amp;quot;: LET TS=PI: RETURN
+4815 IF YB&amp;gt;=BB THEN PRINT : PRINT &amp;quot;THE &amp;quot;;F$;&amp;quot; ACCEPTS&amp;quot;: LET MU=MU-YB: LET TS=0: RETURN
+4820 IF I(BF)*K(BF)&amp;gt;=BB THEN PRINT : PRINT &amp;quot;THE &amp;quot;;F$;&amp;quot; IS DISGUSTED&amp;quot;: PRINT &amp;quot;HE TAKES YOUR &amp;quot;;K$(BF): LET I(BF)=0: LET TS=O: LET BF=O: RETURN
+4825 PRINT : PRINT &amp;quot;THE &amp;quot;;F$;&amp;quot; ATTACKS YOU&amp;quot;: LET TS=PI: RETURN
+4845 LET DI=O: IF I(12)&amp;lt;U THEN LET CS=CS-30: PRINT : PRINT &amp;quot;YOU ARE VERY THIRSTY&amp;quot;: RETURN
+4846 LET I(12)=I(12)-U: LET CS=CS+10: RETURN
+4850 IF I(U)=U AND I(12)&amp;lt;1 THEN PRINT : PRINT &amp;quot;YOUR HORSE NEEDS WATER&amp;quot;: LET HS=HS-2: RETURN
+4851 LET I(12)=I(12)-U: LET CS=CS+10: RETURN
+4855 IF I(U)=O THEN RETURN
+4856 IF I(11)&amp;lt;=O AND DE=U THEN PRINT : PRINT &amp;quot;HORSES DON&amp;#x27;T EAT SAND&amp;quot;: LET HS=HS-U
+4857 IF I(11)&amp;lt;=O AND MT=U THEN PRINT : PRINT &amp;quot;HORSES DON&amp;#x27;T EAT ROCKS&amp;quot;: LET HS=HS-U
+4858 IF I(11)&amp;gt;O THEN LET I(11)=I(11)-U
+4859 GO SUB VAL &amp;quot;4975&amp;quot;: RETURN
+4860 LET MI=O: IF I(13)&amp;lt;U THEN LET CS=CS-10
+4861 IF I(15)&amp;lt;U THEN LET CS=CS-15
+4862 PRINT : PRINT &amp;quot;YOU ARE VERY COLD&amp;quot;: RETURN
+4870 GO SUB VAL &amp;quot;4960&amp;quot;: IF INT (RND*18)+U&amp;gt;8 THEN LET GN=INT (RND*100)+U: PRINT : PRINT &amp;quot;YOU FIND A GOLD NUGGET WORTH $&amp;quot;;GN: LET MU=MU+GN: RETURN
+4871 LET GN=INT (RND*7)+10: LET I(GN)=I(GN)+U: PRINT : PRINT &amp;quot;YOU FIND &amp;quot;;K$(GN): RETURN
+4950 PRINT : PRINT &amp;quot;WILL YOU RUN,FIGHT OR BRIBE ?&amp;quot;: BEEP .5,20: INPUT &amp;quot;ENTER R,F OR B &amp;quot;; LINE H$: IF H$=&amp;quot;R&amp;quot; OR H$=&amp;quot;F&amp;quot; OR H$=&amp;quot;B&amp;quot; THEN RETURN
+4955 GO TO VAL &amp;quot;4950&amp;quot;
+4960 BEEP .2,20: BEEP .2,10: BEEP .2,15: RETURN
+4970 IF HL=U THEN LET KK=KK-U: RETURN
+4971 PRINT : PRINT &amp;quot;YOUR HORSE GOES LAME&amp;quot;: LET HS=HS-U: LET HL=U: PRINT &amp;quot;THIS ADDS 2 DAYS TO YOUR JOURNEY&amp;quot;: LET N=N-R
+4975 IF I(U)=O THEN RETURN
+4976 IF HS&amp;lt;=U THEN LET I(U)=O: PRINT : PRINT &amp;quot;YOUR HORSE IS DEAD&amp;quot;: GO SUB VAL &amp;quot;9226&amp;quot;: RETURN
+4990 IF CS&amp;lt;=O THEN PRINT : PRINT &amp;quot;YOU&amp;#x27;RE DEAD.....&amp;quot;: LET M$=&amp;quot;YOU RAN OUT OF STRENGTH!&amp;quot;: GO TO VAL &amp;quot;5270&amp;quot;
+4991 RETURN
+5002 BORDER U: CLS : PRINT AT 9,U;&amp;quot;YOU BOTH WALK INTO THE STREET &amp;quot;,,,&amp;quot; FOR A FIGHT TO THE DEATH.&amp;quot;
+5003 RESTORE VAL &amp;quot;9080&amp;quot;: FOR N=U TO 10: READ K: READ G: BEEP K/3,G: NEXT N
+5004 LET SF=O: PAPER O: BORDER INT PI: CLS
+5006 IF I(INT PI)+I(4)&amp;lt;=O THEN LET M$=&amp;quot;YOU DIDN&amp;#x27;T HAVE A GUN!&amp;quot;: GO TO VAL &amp;quot;5012&amp;quot;
+5007 IF I(5)+I(6)&amp;lt;=O THEN LET M$=&amp;quot;YOU DIDN&amp;#x27;T HAVE ANY BULLETS!&amp;quot;: GO TO VAL &amp;quot;5012&amp;quot;
+5008 IF I(INT PI)&amp;gt;O AND I(5)&amp;lt;=O AND I(6)&amp;gt;=O OR I(4)&amp;gt;O AND I(5)&amp;gt;O AND I(6)&amp;lt;=O THEN LET M$=&amp;quot;YOUR BULLETS DIDN&amp;#x27;T FIT YOUR GUN&amp;quot;: GO TO VAL &amp;quot;5012&amp;quot;
+5010 LET Y=O: LET M$=&amp;quot;YOU WERE NOT FAST ENOUGH!&amp;quot;: GO TO VAL &amp;quot;5018&amp;quot;
+5012 LET Y=U
+5019 POKE 23606,247: POKE 23607,242: PRINT &amp;quot; !&amp;quot;&amp;quot;#$ %&amp;quot;,,&amp;quot; &amp;amp;&amp;#x27;()* +&amp;quot;;TAB 25;&amp;quot;,-.     /0123 4&amp;quot;;TAB 25;&amp;quot;567    89:;&amp;lt;= &amp;gt;&amp;quot;;TAB 25;&amp;quot;?@A    BCDEF G&amp;quot;;TAB 0;&amp;quot;HIJKL MN&amp;quot;,,&amp;quot;OP QRSTU VW&amp;quot;;TAB 21;&amp;quot;XYZ\] ↑_£abcdefghijklm&amp;quot;;TAB 20;&amp;quot;no   pqrst uvwxyz   {|}~©&amp;quot;
+5030 POKE 23607,245: PRINT AT 8,13;&amp;quot;!      &amp;quot;&amp;quot;# $%&amp;amp;&amp;#x27;()* +,-./0123456789     :;&amp;lt; = &amp;gt;?@AB C   DEFGHIJKLMNO    PQR STUVWXYZ[\]↑_£abcdefghij    klmno pqrstuv wxyz{|}~ ©&amp;quot;
+5050 POKE 23607,248: PRINT AT 12,11;&amp;quot;!&amp;quot;&amp;quot;#$   %&amp;amp;&amp;#x27;()*  +,-./012345   6789:      ;&amp;lt;=&amp;gt;?@ABC D EFGHIJKLMNOP&amp;quot;;TAB 21;&amp;quot;QRSTUVW X  YZ[\]↑_&amp;quot;;TAB 24;&amp;quot;£abcdefghi&amp;quot;;TAB 25;&amp;quot;jklmnop&amp;quot;;TAB 26;&amp;quot;qrstuvwxy&amp;quot;;TAB 28;&amp;quot;z {|}~©&amp;quot;;TAB 32
+5070 POKE VAL &amp;quot;23606&amp;quot;,VAL &amp;quot;254&amp;quot;: POKE VAL &amp;quot;23607&amp;quot;,VAL &amp;quot;251&amp;quot;: PRINT &amp;quot;£[]{&amp;quot;;TAB 0;&amp;quot;}&amp;quot;;TAB 32
+5120 PRINT PAPER 5;AT 10,15;&amp;quot;abc&amp;quot;;AT 11,15; PAPER 6;&amp;quot;def&amp;quot;;AT 12,15;&amp;quot;ghi&amp;quot;;AT 13,15;&amp;quot;jkl&amp;quot;;AT 14,15;&amp;quot;m n&amp;quot;
+5125 LET K=INT (RND*4)+2: FOR D=U TO K: RESTORE VAL &amp;quot;9035&amp;quot;: FOR N=U TO 20: READ H: READ F: BEEP H/3,F
+5130 IF INKEY$&amp;lt;&amp;gt;&amp;quot;&amp;quot; AND Y=0 THEN LET SF=1: GO TO VAL &amp;quot;5300&amp;quot;
+5135 NEXT N: NEXT D
+5200 PRINT PAPER 6;AT 11,15;&amp;quot;oep&amp;quot;;AT 12,15;&amp;quot;qhr&amp;quot;
+5210 LET M=INT (RND*5)+5: FOR N=1 TO M
+5215 IF INKEY$&amp;lt;&amp;gt;&amp;quot;&amp;quot; AND Y=0 THEN GO TO VAL &amp;quot;5300&amp;quot;
+5220 NEXT N
+5250 PRINT PAPER 6;AT 11,15;&amp;quot;set&amp;quot;;AT 12,15;&amp;quot;uhv&amp;quot;
+5255 FOR N=-20 TO 20: BEEP .05,N: BEEP .1,N*-1.5: NEXT N
+5260 PAPER O: INK VAL &amp;quot;9&amp;quot;: BORDER O: CLS
+5265 PRINT AT 10,10;&amp;quot;HE SHOT YOU!&amp;quot;
+5270 RESTORE VAL &amp;quot;9100&amp;quot;: FOR N=U TO 11: READ M: READ W: BEEP M/3,W: NEXT N
+5280 GO TO VAL &amp;quot;8500&amp;quot;
+5300 PRINT PAPER 6;AT 11,15;&amp;quot;wex&amp;quot;;AT 12,15;&amp;quot;yz\&amp;quot;
+5305 PLOT 128,100: DRAW -9,18: PRINT PAPER VAL &amp;quot;5&amp;quot;;AT 6,12;&amp;quot;AAAGGH!&amp;quot;
+5310 FOR N=O TO 40: BEEP .002,N: NEXT N
+5315 RESTORE VAL &amp;quot;9080&amp;quot;: FOR N=U TO 10: READ M: READ W: BEEP M/3,W: NEXT N
+5320 IF SF=U THEN GO TO VAL &amp;quot;5405&amp;quot;
+5325 PAPER 4: INK 9: BORDER U: CLS : PRINT AT 6,2;&amp;quot;YOU CARRY THE BODY TO THE&amp;quot;: PRINT : PRINT &amp;quot;  SHERIFFS OFFICE.....&amp;quot;: GO SUB VAL &amp;quot;2455&amp;quot;: GO TO VAL &amp;quot;2460&amp;quot;
+5405 PAPER O: INK VAL &amp;quot;9&amp;quot;: BORDER O: CLS
+5410 PRINT AT 7,9;&amp;quot;YOU DREW FIRST!&amp;quot;: PRINT : PRINT TAB 9;&amp;quot;THAT&amp;#x27;S MURDER.&amp;quot;: PRINT : PRINT : PRINT TAB 5;&amp;quot;THE SHERIFF ARRESTS YOU&amp;quot;: PRINT : PRINT TAB 8;&amp;quot;YOU&amp;#x27;LL BE IN JAIL&amp;quot;: PRINT : PRINT TAB 8;&amp;quot;FOR QUITE A WHILE&amp;quot;: GO TO 2725
+6000 GO SUB VAL &amp;quot;300&amp;quot;: PRINT AT 17,1;&amp;quot;YOU ARE IN (&amp;quot;;TN;&amp;quot;)&amp;quot;;T$(TN): PRINT : PRINT TAB 4;&amp;quot;WHERE DO YOU WANT TO GO?&amp;quot;
+6005 INPUT &amp;quot;ENTER NUMBER OF DESTINATION &amp;quot;; LINE E$: LET E$=E$+&amp;quot; &amp;quot;: IF CODE E$(U)&amp;lt;49 OR CODE E$(U)&amp;gt;53 THEN GO TO VAL &amp;quot;6005&amp;quot;
+6025 LET FL=VAL E$: IF FL&amp;lt;U OR FL&amp;gt;5 OR FL=TN THEN GO TO VAL &amp;quot;6005&amp;quot;
+6028 LET G=T(TN,FL)
+6030 IF G&amp;lt;-10 THEN LET DE=O: LET MT=U: LET G=G/-3: LET P$=&amp;quot;MOUNTAINS&amp;quot;: GO TO VAL &amp;quot;6045&amp;quot;
+6035 IF G&amp;lt;O THEN LET DE=U: LET MT=O: LET G=G*-U: LET P$=&amp;quot;DESERT&amp;quot;: GO TO VAL &amp;quot;6045&amp;quot;
+6040 LET P$=&amp;quot;OPEN RANGE&amp;quot;: LET MT=O: LET DE=O
+6045 PRINT AT 19,U;T$(FL);&amp;quot; IS &amp;quot;;G;&amp;quot; DAYS RIDE&amp;quot;,&amp;quot; ACROSS THE &amp;quot;;P$: BEEP .3,7: BEEP .2,14: BEEP .3,-7
+6050 INPUT &amp;quot;    PRESS ENTER TO CONTINUE&amp;quot;; LINE H$
+6060 PAPER 4: BORDER U: CLS : PRINT AT 4,4;&amp;quot;DO YOU WANT TO:&amp;quot;: PRINT : PRINT TAB 5;&amp;quot;A) START YOUR JOURNEY&amp;quot;: PRINT : PRINT TAB 5;&amp;quot;B) BUY PROVISIONS&amp;quot;: PRINT : PRINT TAB 5;&amp;quot;C) LOOK AT MAP AGAIN&amp;quot;;AT 14,3;&amp;quot;PRESS LETTER OF YOUR CHOICE&amp;quot;
+6065 BEEP .01,5: IF INKEY$=&amp;quot;A&amp;quot; THEN GO TO VAL &amp;quot;4000&amp;quot;
+6070 IF INKEY$=&amp;quot;B&amp;quot; THEN GO TO VAL &amp;quot;7660&amp;quot;
+6075 IF INKEY$=&amp;quot;C&amp;quot; THEN GO TO VAL &amp;quot;6000&amp;quot;
+6080 BEEP .02,29: GO TO VAL &amp;quot;6065&amp;quot;
+7000 PAPER VAL &amp;quot;7&amp;quot;: INK VAL &amp;quot;9&amp;quot;: CLS
+7001 PRINT &amp;quot;        &amp;quot;: PRINT &amp;quot;              &amp;quot;: PRINT &amp;quot;             &amp;quot;: PRINT &amp;quot;         &amp;quot;
+7005 PRINT AT 7,4;&amp;quot;DEAD&amp;quot;;AT 7,23;&amp;quot;DEAD&amp;quot;;AT 9,5;&amp;quot;OR&amp;quot;;AT 9,24;&amp;quot;OR&amp;quot;;AT 11,4;&amp;quot;ALIVE&amp;quot;;AT 11,23;&amp;quot;ALIVE&amp;quot;;AT 13,4;&amp;quot;$&amp;quot;;R(L);AT 13,23;&amp;quot;$&amp;quot;;R(L)
+7010 PLOT 117,135: DRAW -7,-17: DRAW 18,-10: DRAW O,15: DRAW 10,12: DRAW 8,-17: DRAW -18,-10: PLOT 127,123: DRAW -10,12: DRAW 10,-9: DRAW 11,9: PLOT 145,120: DRAW 15,-R: DRAW -32,-12: PLOT 127,106: DRAW -32,12: DRAW 15,R
+7015 PLOT VAL &amp;quot;111&amp;quot;,VAL &amp;quot;112&amp;quot;: DRAW VAL &amp;quot;6&amp;quot;,VAL &amp;quot;-30&amp;quot;: PLOT VAL &amp;quot;145&amp;quot;,VAL &amp;quot;112&amp;quot;: DRAW VAL &amp;quot;-6&amp;quot;,VAL &amp;quot;-30&amp;quot;: DRAW VAL &amp;quot;-22&amp;quot;,O,-PI
+7020 IF D$(L)&amp;lt;&amp;gt;&amp;quot;NO RIGHT EAR.......&amp;quot; THEN PLOT VAL &amp;quot;112&amp;quot;,VAL &amp;quot;108&amp;quot;: DRAW VAL &amp;quot;-4&amp;quot;,O,PI: DRAW VAL &amp;quot;6&amp;quot;,VAL &amp;quot;-13&amp;quot;
+7025 IF D$(L)&amp;lt;&amp;gt;&amp;quot;NO LEFT EAR........&amp;quot; THEN PLOT VAL &amp;quot;144&amp;quot;,VAL &amp;quot;108&amp;quot;: DRAW VAL &amp;quot;4&amp;quot;,O,-PI: DRAW VAL &amp;quot;-6&amp;quot;,VAL &amp;quot;-13&amp;quot;
+7030 PLOT VAL &amp;quot;132&amp;quot;,VAL &amp;quot;82&amp;quot;: PLOT VAL &amp;quot;131&amp;quot;,VAL &amp;quot;83&amp;quot;: DRAW VAL &amp;quot;-7&amp;quot;,O: PLOT VAL &amp;quot;123&amp;quot;,VAL &amp;quot;82&amp;quot;
+7035 PLOT VAL &amp;quot;126&amp;quot;,VAL &amp;quot;90&amp;quot;: PLOT VAL &amp;quot;128&amp;quot;,VAL &amp;quot;90&amp;quot;: PLOT VAL &amp;quot;127&amp;quot;,VAL &amp;quot;92&amp;quot;: PLOT VAL &amp;quot;127&amp;quot;,VAL &amp;quot;95&amp;quot;: PLOT VAL &amp;quot;127&amp;quot;,VAL &amp;quot;97&amp;quot;: PLOT VAL &amp;quot;127&amp;quot;,VAL &amp;quot;98&amp;quot;: PLOT VAL &amp;quot;127&amp;quot;,VAL &amp;quot;101&amp;quot;
+7040 PLOT VAL &amp;quot;116&amp;quot;,VAL &amp;quot;104&amp;quot;: PLOT VAL &amp;quot;116&amp;quot;,VAL &amp;quot;105&amp;quot;: DRAW VAL &amp;quot;3&amp;quot;,O: PLOT VAL &amp;quot;119&amp;quot;,VAL &amp;quot;104&amp;quot;: PLOT VAL &amp;quot;120&amp;quot;,VAL &amp;quot;104&amp;quot;: PLOT VAL &amp;quot;119&amp;quot;,VAL &amp;quot;105&amp;quot;
+7045 PLOT VAL &amp;quot;138&amp;quot;,VAL &amp;quot;105&amp;quot;: DRAW VAL &amp;quot;-3&amp;quot;,O: PLOT VAL &amp;quot;136&amp;quot;,VAL &amp;quot;104&amp;quot;: DRAW VAL &amp;quot;-3&amp;quot;,0: PLOT VAL &amp;quot;135&amp;quot;,VAL &amp;quot;106&amp;quot;: PLOT VAL &amp;quot;139&amp;quot;,VAL &amp;quot;104&amp;quot;
+7050 PLOT VAL &amp;quot;134&amp;quot;,VAL &amp;quot;101&amp;quot;: DRAW VAL &amp;quot;3&amp;quot;,O: PLOT VAL &amp;quot;133&amp;quot;,VAL &amp;quot;102&amp;quot;: PLOT VAL &amp;quot;123&amp;quot;,VAL &amp;quot;102&amp;quot;: PLOT VAL &amp;quot;119&amp;quot;,VAL &amp;quot;101&amp;quot;: DRAW VAL &amp;quot;3&amp;quot;,O
+7055 IF D$(L)&amp;lt;&amp;gt;&amp;quot;NO EYEBROWS........&amp;quot; THEN PLOT VAL &amp;quot;132&amp;quot;,VAL &amp;quot;105&amp;quot;: PLOT VAL &amp;quot;131&amp;quot;,VAL &amp;quot;105&amp;quot;: PLOT VAL &amp;quot;131&amp;quot;,VAL &amp;quot;104&amp;quot;: PLOT VAL &amp;quot;135&amp;quot;,VAL &amp;quot;107&amp;quot;: DRAW VAL &amp;quot;4&amp;quot;,O: PLOT VAL &amp;quot;132&amp;quot;,VAL &amp;quot;106&amp;quot;: DRAW VAL &amp;quot;4&amp;quot;,O: PLOT VAL &amp;quot;123&amp;quot;,VAL &amp;quot;104&amp;quot;: PLOT VAL &amp;quot;123&amp;quot;,VAL &amp;quot;105&amp;quot;: PLOT VAL &amp;quot;122&amp;quot;,VAL &amp;quot;105&amp;quot;: PLOT VAL &amp;quot;119&amp;quot;,VAL &amp;quot;106&amp;quot;: DRAW VAL &amp;quot;4&amp;quot;,O: PLOT VAL &amp;quot;116&amp;quot;,VAL &amp;quot;107&amp;quot;: DRAW VAL &amp;quot;5&amp;quot;,O
+7060 PLOT VAL &amp;quot;114&amp;quot;,VAL &amp;quot;95&amp;quot;: DRAW O,VAL &amp;quot;16&amp;quot;: PLOT VAL &amp;quot;113&amp;quot;,VAL &amp;quot;98&amp;quot;: DRAW O,VAL &amp;quot;13&amp;quot;: PLOT VAL &amp;quot;112&amp;quot;,VAL &amp;quot;105&amp;quot;: DRAW O,VAL &amp;quot;7&amp;quot;: PLOT VAL &amp;quot;142&amp;quot;,VAL &amp;quot;96&amp;quot;: DRAW O,VAL &amp;quot;15&amp;quot;: PLOT VAL &amp;quot;143&amp;quot;,VAL &amp;quot;98&amp;quot;: DRAW O,VAL &amp;quot;13&amp;quot;: PLOT VAL &amp;quot;144&amp;quot;,VAL &amp;quot;105&amp;quot;: DRAW O,VAL &amp;quot;7&amp;quot;
+7065 PLOT 138,70: DRAW O,10: PLOT 117,70: DRAW O,11: PLOT 100,64: DRAW 14,O: DRAW O,6: PLOT 116,71: PLOT 115,71: DRAW 8,-4: DRAW O,-9: PLOT 121,66: PLOT 120,65: DRAW O,-3: PLOT 119,61: PLOT 118,61: DRAW -3,3: PLOT 132,58: DRAW O,9: DRAW 7,3: PLOT 133,67: DRAW 3,-6: DRAW 4,3: DRAW O,5: PLOT 140,64: DRAW 12,O
+7070 IF D$(L)=&amp;quot;SCAR ON RIGHT CHEEK&amp;quot; THEN PLOT 119,89: DRAW 3,7
+7075 IF D$(L)=&amp;quot;SCAR ON LEFT CHEEK.&amp;quot; THEN PLOT 136,89: DRAW -3,7
+7080 IF D$(L)=&amp;quot;A LEFT EARING......&amp;quot; THEN PLOT 147,104: PLOT 148,103: PLOT 148,102: PLOT 147,101
+7085 IF D$(L)=&amp;quot;A RIGHT EARING.....&amp;quot; THEN PLOT 109,103: PLOT 109,101: PLOT 108,102: PLOT 108,103
+7090 IF D$(L)=&amp;quot;A MOUSTACHE........&amp;quot; THEN PLOT 128,87: DRAW 4,O: PLOT 128,86: DRAW 4,O: PLOT 128,85: DRAW 5,O: PLOT 134,84: PLOT 133,84: PLOT 126,87: DRAW -3,O: PLOT 126,86: DRAW -4,O: PLOT 126,85: DRAW -4,O: PLOT 121,84: PLOT 122,84
+7095 IF D$(L)=&amp;quot;PATCH ON LEFT EYE..&amp;quot; THEN PLOT 132,101: DRAW 5,O: PLOT 132,102: DRAW 6,O: PLOT 132,103: DRAW 7,O: PLOT 132,104: DRAW 7,O: PLOT 129,105: DRAW 10,O: PLOT 133,106: DRAW 6,O: PLOT 135,107: DRAW 4,O: PLOT 140,108: PLOT 141,108
+7100 IF D$(L)=&amp;quot;PATCH ON RIGHT EYE.&amp;quot; THEN PLOT 115,107: DRAW 6,O: PLOT 116,106: DRAW 10,O: PLOT 116,105: DRAW 7,O: PLOT 116,104: DRAW 7,O: PLOT 116,103: DRAW 7,O: PLOT 116,102: DRAW 7,O: PLOT 117,101: DRAW 5,O
+7105 LET L$=&amp;quot;SEE PICTURE&amp;quot;: IF D$(L)=&amp;quot;A LIMP IN LEFT LEG.&amp;quot; THEN LET L$=&amp;quot;LIMPS WITH LEFT LEG&amp;quot;
+7107 IF D$(L)=&amp;quot;A LIMP IN RIGHT LEG&amp;quot; THEN LET L$=&amp;quot;LIMPS WITH RIGHT LEG&amp;quot;
+7110 IF L=R THEN PRINT AT 15,9;B$(L);TAB 6;&amp;quot;ALIAS-THE SUNDANCE KID&amp;quot;,&amp;quot;  FOR-MURDER:HORSE AND CATTLE   RUSTLING:BANK AND TRAIN ROBBERY&amp;quot;,,,&amp;quot;DESCRIPTION-&amp;quot;;L$
+7115 IF L=3 THEN PRINT AT 15,10;B$(L);TAB 2;&amp;quot;ALIAS-KID CURRY:TOM CAPEHART:  BOB NEVILLES&amp;quot;;TAB 3;&amp;quot;FOR-MURDER:TRAIN ROBBERY&amp;quot;,,,&amp;quot;DESCRIPTION-&amp;quot;;L$
+7120 IF L=5 THEN PRINT AT 15,9;B$(L): PRINT &amp;quot; ALIAS-THE TALL TEXAN:J.D.ROSE:&amp;quot;,&amp;quot;FOR:CATTLE RUSTLING:MURDER:FRAUDBANK AND TRAIN ROBBERY&amp;quot;,,,&amp;quot;DESCRIPTION-&amp;quot;;L$
+7125 IF L=U THEN PRINT AT 15,10;B$(L),&amp;quot;  ALIAS-BUTCH CASSIDY:JIM LOWE&amp;quot;,&amp;quot; FOR-HORSE AND CATTLE RUSTLING&amp;quot;,&amp;quot; TRAIN,BANK AND PAYROLL ROBBERY&amp;quot;,,,&amp;quot;DESCRIPTION-&amp;quot;;L$
+7130 IF L=4 THEN PRINT AT 15,12;B$(L),&amp;quot;    ALIAS-WILLIAM MCGUINNNESS&amp;quot;,&amp;quot;   FOR-MURDER:PAYROLL ROBBERY&amp;quot;,&amp;quot;    HORSE AND CATTLE RUSTLING&amp;quot;,,,&amp;quot;DESCRIPTION-&amp;quot;;L$
+7140 INPUT &amp;quot;   PRESS ENTER TO CONTINUE&amp;quot;; LINE H$
+7145 GO TO 501
+7500 LET CS=CS+VAL &amp;quot;50&amp;quot;: LET TP=O: LET GF=O: LET L1=L
+7510 LET L=INT (RND*5)+U: IF L=L1 THEN GO TO 7510
+7515 IF V(L)&amp;lt;R THEN GO TO 7510
+7520 IF L=MB AND V(U)+V(R)+V(INT PI)+V(4)+V(5)&amp;gt;6 THEN GO TO 7510
+7525 LET TN=FL
+7530 IF JB=O AND RND*5&amp;gt;4 THEN GO TO 7540
+7532 LET IS=0: LET LM=LM+INT (RND*2)+U
+7535 RETURN
+7540 FOR N=U TO 5: IF V(N)=U THEN LET JB=N: LET R(N)=R(N)+50: LET V(N)=R: GO TO 7650
+7545 NEXT N
+7650 RETURN
+7666 LET Z=3: BORDER U: PAPER U: CLS : PRINT TAB 6;&amp;quot;YOU ARE IN THE STORE&amp;quot;: PRINT : FOR N=U TO 16: IF N&amp;gt;9 THEN LET Z=R
+7667 BEEP .1,N: PRINT TAB Z;N;&amp;quot;) &amp;quot;;K$(N);&amp;quot;$&amp;quot;;K(N): NEXT N
+7668 PRINT AT 19,9;&amp;quot;YOU HAVE $&amp;quot;;MU;&amp;quot;  &amp;quot;: PRINT
+7669 PRINT PAPER 2;&amp;quot;  WHICH ITEMS DO YOU REQUIRE?   &amp;quot;
+7670 INPUT &amp;quot;  ENTER NUMBER (0 TO LEAVE) &amp;quot;; LINE E$: LET E$=E$+&amp;quot; &amp;quot;: IF CODE E$(U)&amp;gt;57 OR CODE E$(U)&amp;lt;48 THEN GO TO VAL &amp;quot;7670&amp;quot;
+7672 LET Z=VAL E$: IF Z=O THEN GO TO VAL &amp;quot;500&amp;quot;
+7675 IF Z&amp;gt;16 THEN GO TO VAL &amp;quot;7670&amp;quot;
+7680 BEEP .2,Z: BEEP .1,Z*-U: PRINT PAPER 1;AT 21,U;S$
+7681 IF Z&amp;lt;5 AND I(Z)=U THEN GO TO VAL &amp;quot;7685&amp;quot;
+7682 IF Z=7 AND I(Z)=U THEN GO TO VAL &amp;quot;7685&amp;quot;
+7683 IF Z=9 AND I(Z)=U THEN GO TO VAL &amp;quot;7685&amp;quot;
+7684 GO TO VAL &amp;quot;7686&amp;quot;
+7685 PRINT AT 21,O;&amp;quot;     YOU ALREADY HAVE ONE       &amp;quot;: FOR N=-10 TO 30: BEEP .05,N: BEEP .05,N+R: NEXT N: PRINT AT 21,U;S$: GO TO 7668
+7686 PRINT PAPER 5;AT 21,O;&amp;quot;    HOW MANY WOULD YOU LIKE?    &amp;quot;
+7687 INPUT &amp;quot;  ENTER QUANTITY REQUIRED &amp;quot;; LINE E$: LET E$=E$+&amp;quot; &amp;quot;: IF CODE E$(U)&amp;lt;47 OR CODE E$(U)&amp;gt;57 THEN GO TO VAL &amp;quot;7687&amp;quot;
+7690 LET Q=VAL E$: IF Q&amp;lt;=O THEN GO TO VAL &amp;quot;7668&amp;quot;
+7691 IF Z&amp;lt;5 AND Q&amp;gt;U THEN GO TO VAL &amp;quot;7695&amp;quot;
+7692 IF Z=7 AND Q&amp;gt;U THEN GO TO VAL &amp;quot;7695&amp;quot;
+7693 IF Z=9 AND Q&amp;gt;U THEN GO TO VAL &amp;quot;7695&amp;quot;
+7694 GO TO VAL &amp;quot;7696&amp;quot;
+7695 PRINT AT 21,O;&amp;quot;     YOU CAN ONLY HAVE ONE      &amp;quot;: FOR N=-10 TO 30: BEEP .05,N: BEEP .05,N+R: NEXT N: PRINT AT 21,U;S$: GO TO 7668
+7696 IF MU&amp;lt;Q*K(Z) THEN PRINT FLASH U;AT 21,U;&amp;quot;      YOU CAN&amp;#x27;T AFFORD IT!    &amp;quot;: GO SUB 9231: GO TO 7668
+7700 IF Z=8 OR Z=6 OR Z=5 THEN LET I(Z)=I(Z)+Q*50: LET MU=MU-Q*K(Z): GO TO VAL &amp;quot;7710&amp;quot;
+7705 LET MU=MU-Q*K(Z): LET I(Z)=I(Z)+Q
+7710 BEEP .3,20: BEEP .3,30: GO TO VAL &amp;quot;7668&amp;quot;
+7810 PAPER O: BORDER O: CLS : PRINT PAPER 2;&amp;quot;STATUS OF &amp;quot;;N$: PRINT : PRINT &amp;quot;YOU HAVE $&amp;quot;;MU: PRINT &amp;quot;YOUR COMBAT STRENGTH IS &amp;quot;;CS: PRINT : PRINT &amp;quot;YOU HAVE THE FOLLOWING:&amp;quot;: FOR N=U TO 16: IF I(N)&amp;gt;O THEN PRINT K$(N);I(N)
+7820 NEXT N: BEEP .5,6: BEEP .4,-6: INPUT &amp;quot;PRESS ENTER TO CONTINUE &amp;quot;; LINE H$: GO TO VAL &amp;quot;500&amp;quot;
+8500 CLS : PRINT AT 6,O;&amp;quot;YOU WENT TO THE GREAT RANCH IN&amp;quot;: PRINT : PRINT &amp;quot;THE SKY BECAUSE :&amp;quot;: PRINT : PRINT M$: FOR N=O TO -30 STEP -U: BEEP .2,N: NEXT N: GO SUB 9500: GO TO 9850
+8900 BORDER O: PAPER O: CLS
+8905 PRINT AT 1,6;&amp;quot;THE STORY SO FAR....&amp;quot;,,,&amp;quot; YOU ARE WALKING HOME ONE NIGHT  WHEN YOU HEAR A GUNSHOT.&amp;quot;,&amp;quot; YOU FIND A DYING MAN LYING IN&amp;quot;,&amp;quot; THE ROAD.HE MUTTERS THE WORDS;  &amp;quot;&amp;quot;THE WILD BUNCH...THE MAN WITH&amp;quot;
+8910 PRINT &amp;quot; &amp;quot;;D$(MB);&amp;quot;&amp;quot;&amp;quot;&amp;quot;
+8915 PRINT AT 10,R;&amp;quot;THE MAN COUGHS AND DIES.&amp;quot;,&amp;quot; YOU PICK UP A COLT 45 THAT MUST BELONG TO THE MURDERER.&amp;quot;,&amp;quot;  AT THAT MOMENT THE SHERIFF&amp;quot;,&amp;quot; RIDES UP.HE SEES YOU WITH THE   BODY AND THE GUN IN YOUR HAND.  HE SHOUTS;&amp;quot;&amp;quot;DON&amp;#x27;T MOVE OR I&amp;#x27;LL   FILL YOU FULL OF LEAD!&amp;quot;&amp;quot;&amp;quot;,&amp;quot; YOU RUN OFF INTO THE NIGHT WITH BULLETS FLYING PAST YOUR HEAD.&amp;quot;
+8920 PRINT AT 21,12; PAPER 6;&amp;quot;ANY KEY&amp;quot;: GO SUB 8925: GO TO VAL &amp;quot;8950&amp;quot;
+8925 LET Y=U
+8928 FOR L=U TO R: RESTORE VAL &amp;quot;9020&amp;quot;
+8930 FOR N=Y TO 26: IF L=R AND N=24 THEN RESTORE 9025
+8932 READ z: READ x: BEEP z/2.5,x: IF INKEY$&amp;lt;&amp;gt;&amp;quot;&amp;quot; THEN RETURN
+8935 NEXT N: NEXT L
+8940 PAUSE 30: GO TO VAL &amp;quot;8925&amp;quot;
+8950 CLS : PRINT AT 7,6;&amp;quot;YOU ARE A WANTED MAN&amp;quot;,,,&amp;quot; YOUR ONLY CHANCE TO PROVE YOUR  INNOCENCE IS TO FIND THE REAL   KILLER A MEMBER OF THE DREADED&amp;quot;: PRINT : PRINT TAB 10;&amp;quot;&amp;quot;&amp;quot;WILD BUNCH!&amp;quot;&amp;quot;&amp;quot;: PRINT : PRINT : PRINT TAB 12; PAPER 6;&amp;quot;ANY KEY&amp;quot;
+8960 LET Y=N+U: GO SUB VAL &amp;quot;8930&amp;quot;
+8965 GO SUB VAL &amp;quot;300&amp;quot;
+8970 PRINT AT 18,U;&amp;quot;YOU HAVE $50.YOU MAY CATCH THE STAGE TO ANY OF THE ABOVE TOWNS TO START YOUR SEARCH.&amp;quot;
+8975 INPUT &amp;quot;    ENTER TOWN NUMBER &amp;quot;; LINE E$: LET E$=E$+&amp;quot; &amp;quot;: IF CODE E$(1)&amp;gt;53 OR CODE E$(1)&amp;lt;49 THEN GO TO 8975
+8976 LET TN=VAL E$: IF TN&amp;gt;5 THEN GO TO VAL &amp;quot;8975&amp;quot;
+8977 LET UM=INT (RND*5)+U: IF UM=TN THEN GO TO VAL &amp;quot;8977&amp;quot;
+8980 LET FL=TN: LET MU=50: GO TO VAL &amp;quot;480&amp;quot;
+9001 DATA &amp;quot;PATCH ON RIGHT EYE.&amp;quot;
+9002 DATA &amp;quot;SCAR ON LEFT CHEEK.&amp;quot;
+9003 DATA &amp;quot;NO LEFT EAR........&amp;quot;
+9004 DATA &amp;quot;PATCH ON LEFT EYE..&amp;quot;
+9005 DATA &amp;quot;SCAR ON RIGHT CHEEK&amp;quot;
+9006 DATA &amp;quot;A LEFT EARING......&amp;quot;
+9007 DATA &amp;quot;A LIMP IN LEFT LEG.&amp;quot;
+9008 DATA &amp;quot;NO EYEBROWS........&amp;quot;
+9009 DATA &amp;quot;NO RIGHT EAR.......&amp;quot;
+9010 DATA &amp;quot;A LIMP IN RIGHT LEG&amp;quot;
+9011 DATA &amp;quot;A MOUSTACHE........&amp;quot;
+9012 DATA &amp;quot;A RIGHT EARING.....&amp;quot;
+9015 DATA &amp;quot;GEORGE PARKER&amp;quot;,&amp;quot;HARRY LONGBOUGH&amp;quot;,&amp;quot;HARVEY LOGAN&amp;quot;,&amp;quot;ELZA LAY&amp;quot;,&amp;quot;BEN KILPATRICK&amp;quot;
+9020 DATA U,15,1.5,15,.5,13,.75,12,U,13,U,15,U,13,U,12,.5,10,U,8,U,7,1.5,3,.1,-60,.1,-60,.1,-60,.5,3,U,8,.5,8,U,8,U,10,U,12,U,13,U,12,U,10,U,8,R,10
+9025 DATA U,8,U,10,R,8
+9035 DATA 1.5,7,.75,14,U,10,1.5,12,U,10,U,12,1.5,14,1.5,19,1.5,17,U,19,.1,-60,.1,-60,.1,-60,1.25,7,.75,14,U,10,1.5,12,U,9,U,5,R,7
+9045 DATA &amp;quot;DRY GULCH&amp;quot;,&amp;quot;DODGE CITY&amp;quot;,&amp;quot;NUGGET CITY&amp;quot;,&amp;quot;BULLETVILLE&amp;quot;,&amp;quot;DEADMANS CREEK&amp;quot;
+9050 DATA 3,12,1,10,1,9,1,7,2,9
+9060 DATA &amp;quot;8%&amp;quot;
+9061 DATA &amp;quot;9&amp;amp;&amp;quot;
+9062 DATA &amp;quot;K&amp;amp;&amp;quot;
+9063 DATA &amp;quot;7@ 7&amp;amp;&amp;quot;
+9064 DATA &amp;quot;8&amp;amp; 8@&amp;quot;
+9065 DATA &amp;quot;A@ A&amp;amp;&amp;quot;
+9066 DATA &amp;quot;K# K@ 9@ 9%&amp;quot;
+9067 DATA &amp;quot;10# 10@ 10&amp;amp;&amp;quot;
+9068 DATA &amp;quot;Q@ Q&amp;amp; Q#&amp;quot;
+9069 DATA &amp;quot;4@ 5@ 6&amp;amp; 7% 8#&amp;quot;
+9070 DATA &amp;quot;5# 6# 7# 9# A#&amp;quot;
+9071 DATA &amp;quot;4% 4# 4&amp;amp; 5&amp;amp; 5%&amp;quot;
+9072 DATA &amp;quot;J# J&amp;amp; J@ 6@ 6#&amp;quot;
+9073 DATA &amp;quot;2# 2% 2&amp;amp; 2@&amp;quot;
+9074 DATA &amp;quot;3% 3&amp;amp; 3@ 3#&amp;quot;
+9075 DATA &amp;quot;10% J% Q% K% A%&amp;quot;
+9080 DATA U,9,U,7,R,9,R,R,U,4,U,5,U,9,U,9,U,7,R,4
+9085 DATA U,11,U,11,U,9,U,8,U,8,U,7,U,8,R,8
+9090 DATA U,7,U,8,U,8,U,7,U,8,U,11,U,8,U,11,R,9,R,6
+9095 DATA 200,100,100,250,125
+9100 DATA R,R,R,R,U,R,R,R,R,5,U,4,R,4,U,R,R,R,U,U,R,R
+9110 DATA O,5,3,-21,-10,5,O,2,5,-6,3,R,O,-15,-7,-21,5,-15,O,R,-10,-6,-7,R,O
+9120 DATA R,3,U,4,3,R,U,R,3,R,5,4,R,4,5
+9140 DATA &amp;quot;HORSE---------------&amp;quot;,&amp;quot;SADDLE--------------&amp;quot;,&amp;quot;.44 COLT------------&amp;quot;,&amp;quot;.45 COLT------------&amp;quot;,&amp;quot;COLT .44 BULLETS----&amp;quot;,&amp;quot;COLT .45 BULLETS----&amp;quot;,&amp;quot;WINCHESTER RIFLE----&amp;quot;,&amp;quot;WINCHESTER BULLETS--&amp;quot;,&amp;quot;KNIFE---------------&amp;quot;,&amp;quot;FOOD FOR 1 DAY------&amp;quot;,&amp;quot;HORSE FOOD FOR 1 DAY&amp;quot;,&amp;quot;CANTEEN OF WATER----&amp;quot;,&amp;quot;GREAT COAT----------&amp;quot;,&amp;quot;WHISKEY-------------&amp;quot;,&amp;quot;BLANKET-------------&amp;quot;,&amp;quot;SNAKEBITE MEDICINE--&amp;quot;
+9145 DATA 55,28,35,35,5,10,40,15,10,R,3,3,15,R,8,4
+9151 DATA &amp;quot;THE BLACKSMITH&amp;quot;
+9152 DATA &amp;quot;THE TOWN MAYOR&amp;quot;
+9153 DATA &amp;quot;THE DOCTOR&amp;quot;
+9154 DATA &amp;quot;MY DEPUTY&amp;quot;
+9200 DATA &amp;quot;MEAN&amp;quot;,&amp;quot;TOUGH&amp;quot;,&amp;quot;BIG&amp;quot;,&amp;quot;CRUEL&amp;quot;,&amp;quot;MAD&amp;quot;
+9205 DATA &amp;quot;NASTY&amp;quot;,&amp;quot;UGLY&amp;quot;,&amp;quot;VICIOUS&amp;quot;,&amp;quot;ANGRY&amp;quot;,&amp;quot;DESPERATE&amp;quot;
+9210 DATA &amp;quot;JUMPS OUT ON YOU&amp;quot;,&amp;quot;SPRINGS OUT&amp;quot;,&amp;quot;WANDERS UP TO YOU&amp;quot;,&amp;quot;ATTACKS YOU&amp;quot;,&amp;quot;CHARGES TOWARD YOU&amp;quot;,&amp;quot;SNEAKS UP TO YOU&amp;quot;
+9215 DATA &amp;quot;RED INDIAN&amp;quot;,&amp;quot;BANDIT&amp;quot;,&amp;quot;GUNSLINGER&amp;quot;,&amp;quot;BOUNTY HUNTER&amp;quot;,&amp;quot;TRAPPER&amp;quot;,&amp;quot;DESPERADO&amp;quot;,&amp;quot;VULTURE&amp;quot;
+9225 DATA R,5,R,10,U,10,R,10,R,14,R,12,U,10,R,12,U,14,U,12,R,10,U,10,R,14,R,17,3,19
+9226 RESTORE VAL &amp;quot;9225&amp;quot;: FOR W=U TO 15: READ X: READ E: BEEP X/5,E: NEXT W: PAUSE 100: RETURN
+9230 DATA U,13,1.25,20,.75,18,R,20,U,18,.5,13,U,16,.5,13,U,16,R,15
+9231 RESTORE VAL &amp;quot;9230&amp;quot;: FOR W=U TO 10: READ X: READ E: BEEP X/3,E: NEXT W: RETURN
+9505 BEEP .5,PI: INPUT &amp;quot;PRESS ENTER FOR SCORE &amp;quot;; LINE H$: IF MU&amp;gt;50 THEN LET SC=SC+MU-50
+9520 IF SC&amp;gt;HC THEN LET HC=SC: LET Q$=N$
+9521 RETURN
+9525 INK 9: PRINT AT 17,5;&amp;quot;YOU HAVE SCORED &amp;quot;;SC: PRINT : PRINT TAB 4;&amp;quot;BEST SCORE SO FAR IS &amp;quot;;HC: PRINT : PRINT TAB 4;&amp;quot;BY &amp;quot;;Q$: INPUT &amp;quot;PRESS ENTER FOR ANOTHER GAME&amp;quot;; LINE H$: GO TO 15
+9600 FOR N=U TO 6: FOR X=O TO 7: BORDER X: PAPER N: CLS : BEEP .01,N*X+10: NEXT X: NEXT N
+9605 PRINT FLASH U;AT 4,4;&amp;quot;****CONGRATULATIONS****&amp;quot;: PRINT : PRINT : PRINT &amp;quot; THE KILLER WAS &amp;quot;;B$(A): PRINT : PRINT &amp;quot; HE CONFESSED,WHEN THE SHERIFF&amp;quot;: PRINT : PRINT &amp;quot; LOCKED HIM UP...&amp;quot;: PRINT : PRINT &amp;quot; YOU&amp;#x27;RE A HERO,YOU HAVE SAVED&amp;quot;: PRINT : PRINT &amp;quot; THE WEST FROM THE WILD BUNCH!&amp;quot;: LET SC=SC+5000: LET F$=&amp;quot;HERO!&amp;quot;: GO TO 9720
+9700 FOR N=U TO 6: FOR X=7 TO 0 STEP -U: BORDER N: PAPER X: CLS : BEEP .01,N*-U: NEXT X: NEXT N
+9710 PRINT AT 5,U;&amp;quot;UNFORTUNATELY YOU HAVE JUST&amp;quot;: PRINT : PRINT &amp;quot; KILLED THE ONLY MAN WHO COULD&amp;quot;: PRINT : PRINT &amp;quot; PROVE YOUR INNOCENCE. DEAD MEN&amp;quot;: PRINT : PRINT &amp;quot; DON&amp;#x27;T CONFESS....&amp;quot;: LET F$=&amp;quot;IDIOT&amp;quot;
+9720 GO SUB VAL &amp;quot;9500&amp;quot;: GO TO VAL &amp;quot;9800&amp;quot;
+9800 PAPER R: BORDER R: CLS : LET X=62298: LET T=8: GO SUB 9900: DRAW -17,29: PLOT 139,137: DRAW -16,28: PLOT 73,137: DRAW 17,-30: PLOT 107,78: DRAW 16,-30: PRINT AT 6,14;&amp;quot;TOP&amp;quot;;AT 8,13;&amp;quot;GRADE&amp;quot;;AT 10,13;F$: GO TO 9525
+9850 BORDER R: PAPER R: INK O: CLS : LET S$=&amp;quot;&amp;quot;: FOR N=U TO 13: PRINT AT N,13;S$: NEXT N: FOR N=4 TO 6: PRINT AT N,10;S$;S$;S$: NEXT N: INK 9: PRINT PAPER O;AT 5,12;&amp;quot;R.I.P&amp;quot;: GO TO 9525
+9870 PAPER R: BORDER R: INK 0: CLS : LET X=62331: LET T=29: PRINT AT R,9;&amp;quot;&amp;quot;;AT 14,9;&amp;quot;&amp;quot;: FOR N=INT PI TO 13: PRINT PAPER 5;AT N,9;&amp;quot;        &amp;quot;: NEXT N: GO SUB 9900: LET X=62240: FOR N=1 TO 28: PLOT PEEK X,PEEK (X+1): LET X=X+2: NEXT N
+9871 PLOT 108,95: DRAW 28,O,PI: PLOT 126,73: DRAW -3,R: PLOT 116,86: DRAW 12,O,-PI: PLOT 127,110: DRAW 5,3,-PI/R: PLOT 117,110: DRAW -5,3,PI/R: PLOT 147,72: DRAW 6,-8,-PI/R: PLOT 97,72: DRAW -6,-8,PI/R: GO TO 9525
+9900 FOR N=U TO T: PLOT PEEK X,PEEK (X+U): LET X=X+R: DRAW PEEK X,PEEK (X+U): LET X=X+R: NEXT N: RETURN
+9999 INK 9: BEEP .5,O: PAUSE O: GO TO VAL &amp;quot;15&amp;quot;
+</pre>^

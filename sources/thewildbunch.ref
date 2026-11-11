@@ -1,0 +1,36 @@
+; Copyright 2026 Paul Maddern (paul@arcadegeek.co.uk)
+
+;
+; SkoolKit ref file for The Wild Bunch
+;
+; To build the HTML disassembly, run these commands:
+;   tap2sna.py @thewildbunch.t2s
+;   sna2skool.py -H --ini ListRefs=2 -c sources/thewildbunch.ctl TheWildBunch.z80 > sources/thewildbunch.skool
+;   skool2html.py -H sources/thewildbunch.skool -T dark -T wide -toOa
+
+[Config]
+RefFiles=bases.ref;analytics.ref;basic.ref;changelog.ref;graphics.ref;pokes.ref
+GameDir=thewildbunch
+
+[Game]
+Game=The Wild Bunch
+Logo=#SCR$02,$00,$10,$20,$04,$4000,$5800(/images/logo)
+Copyright=&copy; 1984 Firebird Software Ltd<br />&copy; 2026 ArcadeGeek LTD.
+Repository=https://github.com/pobtastic/thewildbunch/
+Canonical=https://skoolkit.arcadegeek.co.uk/thewildbunch/
+GameIndexUrl=https://skoolkit.arcadegeek.co.uk/thewildbunch/
+OgImage=https://skoolkit.arcadegeek.co.uk/thewildbunch/images/logo.png
+LinkInternalOperands=1
+AddressAnchor={address#IF({base}==16)(:04x)}
+
+[PageHeaders]
+GameIndex=The complete<>RAM disassembly (work in progress)
+
+[Index:Graphics:Graphics And Sound]
+Graphics
+
+[Paths+]
+Graphics=graphics/graphics.html
+
+[Page:Graphics]
+SectionPrefix=Graphics

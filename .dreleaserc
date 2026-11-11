@@ -1,0 +1,4 @@
+# Copyright 2026 Paul Maddern (paul@arcadegeek.co.uk)
+GAME=thewildbunch
+SRCFILES=$(echo thewildbunch.skool {thewildbunch,analytics,bases,basic,changelog,graphics,pokes}.ref)
+SKOOL2BINOPTS="-i -S 23296"
