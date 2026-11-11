@@ -106,7 +106,17 @@ Next: <a href="5CCB.html">5CCB</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Workspace for <a href="E933.html">Run_Bootstrap</a>. The first 3E bytes are copied over <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C53.html">PROG</a>; the following words feed reclaim and NEWPPC.
+Tape payload for <a href="E933.html">Run_Bootstrap</a>. The first 3E bytes replace the decoy line at <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C53.html">PROG</a> with the opening of BASIC line 15; the two words that follow feed reclaim and <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C42.html">NEWPPC</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="5b01"></span>
+<div class="comments">
+<div class="paragraph">
+BASIC line header (big-endian line number, little-endian length).
 </div>
 </div>
 </td>
@@ -114,43 +124,72 @@ Workspace for <a href="E933.html">Run_Bootstrap</a>. The first 3E bytes are copi
 <tr>
 <td class="asm-label">Bootstrap_Workspace</td>
 <td class="address-1"><span id="5b01"></span>5B01</td>
-<td class="instruction">DEFB $00,$0F,$6F,$00,$DA,$52,$3A,$FB</td>
-<td class="comment-1" rowspan="8">Bytes copied over <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C53.html">PROG</a>.</td>
+<td class="instruction">DEFB $00,$0F</td>
+<td class="comment-1" rowspan="1">Line number 0F (15).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="5b09"></span>5B09</td>
-<td class="instruction">DEFB $3A,$F5,$AC,$36,$0E,$00,$00,$06</td>
+<td class="address-1"><span id="5b03"></span>5B03</td>
+<td class="instruction">DEFB $6F,$00</td>
+<td class="comment-1" rowspan="1">Length 6F (body continues past this copy into PROG).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="5b05"></span>
+<div class="comments">
+<div class="paragraph">
+Start of line 15 body (tokens), copied over PROG: <code>PAPER R: CLS: PRINT AT 6,9;"HOWDY PARDNER!": PRINT: PRINT TAB 4;"WHAT "</code>.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="5b11"></span>5B11</td>
-<td class="instruction">DEFB $00,$00,$2C,$39,$0E,$00,$00,$09</td>
+<td class="address-1"><span id="5b05"></span>5B05</td>
+<td class="instruction">DEFB $DA,$52,$3A,$FB,$3A,$F5,$AC,$36</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="5b19"></span>5B19</td>
-<td class="instruction">DEFB $00,$00,$3B,$22,$48,$4F,$57,$44</td>
+<td class="address-1"><span id="5b0d"></span>5B0D</td>
+<td class="instruction">DEFB $0E,$00,$00,$06,$00,$00,$2C,$39</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="5b21"></span>5B21</td>
-<td class="instruction">DEFB $59,$20,$50,$41,$52,$44,$4E,$45</td>
+<td class="address-1"><span id="5b15"></span>5B15</td>
+<td class="instruction">DEFB $0E,$00,$00,$09,$00,$00,$3B,$22</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="5b29"></span>5B29</td>
-<td class="instruction">DEFB $52,$21,$22,$3A,$F5,$3A,$F5,$AD</td>
+<td class="address-1"><span id="5b1d"></span>5B1D</td>
+<td class="instruction">DEFB $48,$4F,$57,$44,$59,$20,$50,$41</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="5b31"></span>5B31</td>
-<td class="instruction">DEFB $34,$0E,$00,$00,$04,$00,$00,$3B</td>
+<td class="address-1"><span id="5b25"></span>5B25</td>
+<td class="instruction">DEFB $52,$44,$4E,$45,$52,$21,$22,$3A</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="5b39"></span>5B39</td>
-<td class="instruction">DEFB $22,$57,$48,$41,$54,$20</td>
+<td class="address-1"><span id="5b2d"></span>5B2D</td>
+<td class="instruction">DEFB $F5,$3A,$F5,$AD,$34,$0E,$00,$00</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5b35"></span>5B35</td>
+<td class="instruction">DEFB $04,$00,$00,$3B,$22,$57,$48,$41</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="5b3d"></span>5B3D</td>
+<td class="instruction">DEFB $54,$20</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -173,7 +212,7 @@ End address for <a rel="noopener nofollow" href="https://skoolkit.ca/disassembli
 <span id="5b41"></span>
 <div class="comments">
 <div class="paragraph">
-Line number written to <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C42.html">NEWPPC</a>.
+Line number written to <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/hex/asm/5C42.html">NEWPPC</a> (270F = 9999).
 </div>
 </div>
 </td>
@@ -182,150 +221,6 @@ Line number written to <a rel="noopener nofollow" href="https://skoolkit.ca/disa
 <td class="asm-label">Bootstrap_New_Line</td>
 <td class="address-1"><span id="5b41"></span>5B41</td>
 <td class="instruction">DEFW $270F</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5b43"></span>5B43</td>
-<td class="instruction">DEFB $FF,$FF,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5b4b"></span>5B4B</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5b53"></span>5B53</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5b5b"></span>5B5B</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5b63"></span>5B63</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5b6b"></span>5B6B</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5b73"></span>5B73</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5b7b"></span>5B7B</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5b83"></span>5B83</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5b8b"></span>5B8B</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5b93"></span>5B93</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5b9b"></span>5B9B</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5ba3"></span>5BA3</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5bab"></span>5BAB</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5bb3"></span>5BB3</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5bbb"></span>5BBB</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5bc3"></span>5BC3</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5bcb"></span>5BCB</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5bd3"></span>5BD3</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5bdb"></span>5BDB</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5be3"></span>5BE3</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5beb"></span>5BEB</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5bf3"></span>5BF3</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00,$00,$00,$00</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="5bfb"></span>5BFB</td>
-<td class="instruction">DEFB $00,$00,$00,$00,$00</td>
 <td class="comment-1" rowspan="1"></td>
 </tr>
 </table>

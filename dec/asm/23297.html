@@ -106,7 +106,17 @@ Next: <a href="23755.html">23755</a>
 <td class="routine-comment" colspan="5">
 <div class="details">
 <div class="paragraph">
-Workspace for <a href="59699.html">Run_Bootstrap</a>. The first 62 bytes are copied over <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23635.html">PROG</a>; the following words feed reclaim and NEWPPC.
+Tape payload for <a href="59699.html">Run_Bootstrap</a>. The first 62 bytes replace the decoy line at <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23635.html">PROG</a> with the opening of BASIC line 21; the two words that follow feed reclaim and <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23618.html">NEWPPC</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="23297"></span>
+<div class="comments">
+<div class="paragraph">
+BASIC line header (big-endian line number, little-endian length).
 </div>
 </div>
 </td>
@@ -114,43 +124,72 @@ Workspace for <a href="59699.html">Run_Bootstrap</a>. The first 62 bytes are cop
 <tr>
 <td class="asm-label">Bootstrap_Workspace</td>
 <td class="address-1"><span id="23297"></span>23297</td>
-<td class="instruction">DEFB 0,15,111,0,218,82,58,251</td>
-<td class="comment-1" rowspan="8">Bytes copied over <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23635.html">PROG</a>.</td>
+<td class="instruction">DEFB 0,15</td>
+<td class="comment-1" rowspan="1">Line number 15 (21).</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="23305"></span>23305</td>
-<td class="instruction">DEFB 58,245,172,54,14,0,0,6</td>
+<td class="address-1"><span id="23299"></span>23299</td>
+<td class="instruction">DEFB 111,0</td>
+<td class="comment-1" rowspan="1">Length 111 (body continues past this copy into PROG).</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="23301"></span>
+<div class="comments">
+<div class="paragraph">
+Start of line 21 body (tokens), copied over PROG: <code>PAPER R: CLS: PRINT AT 6,9;"HOWDY PARDNER!": PRINT: PRINT TAB 4;"WHAT "</code>.
+</div>
+</div>
+</td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="23313"></span>23313</td>
-<td class="instruction">DEFB 0,0,44,57,14,0,0,9</td>
+<td class="address-1"><span id="23301"></span>23301</td>
+<td class="instruction">DEFB 218,82,58,251,58,245,172,54</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="23321"></span>23321</td>
-<td class="instruction">DEFB 0,0,59,34,72,79,87,68</td>
+<td class="address-1"><span id="23309"></span>23309</td>
+<td class="instruction">DEFB 14,0,0,6,0,0,44,57</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="23329"></span>23329</td>
-<td class="instruction">DEFB 89,32,80,65,82,68,78,69</td>
+<td class="address-1"><span id="23317"></span>23317</td>
+<td class="instruction">DEFB 14,0,0,9,0,0,59,34</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="23337"></span>23337</td>
-<td class="instruction">DEFB 82,33,34,58,245,58,245,173</td>
+<td class="address-1"><span id="23325"></span>23325</td>
+<td class="instruction">DEFB 72,79,87,68,89,32,80,65</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="23345"></span>23345</td>
-<td class="instruction">DEFB 52,14,0,0,4,0,0,59</td>
+<td class="address-1"><span id="23333"></span>23333</td>
+<td class="instruction">DEFB 82,68,78,69,82,33,34,58</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="asm-label"></td>
-<td class="address-1"><span id="23353"></span>23353</td>
-<td class="instruction">DEFB 34,87,72,65,84,32</td>
+<td class="address-1"><span id="23341"></span>23341</td>
+<td class="instruction">DEFB 245,58,245,173,52,14,0,0</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23349"></span>23349</td>
+<td class="instruction">DEFB 4,0,0,59,34,87,72,65</td>
+<td class="comment-1" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="23357"></span>23357</td>
+<td class="instruction">DEFB 84,32</td>
+<td class="comment-1" rowspan="1"></td>
 </tr>
 <tr>
 <td class="routine-comment" colspan="5">
@@ -173,7 +212,7 @@ End address for <a rel="noopener nofollow" href="https://skoolkit.ca/disassembli
 <span id="23361"></span>
 <div class="comments">
 <div class="paragraph">
-Line number written to <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23618.html">NEWPPC</a>.
+Line number written to <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23618.html">NEWPPC</a> (9999 = 9999).
 </div>
 </div>
 </td>
@@ -182,150 +221,6 @@ Line number written to <a rel="noopener nofollow" href="https://skoolkit.ca/disa
 <td class="asm-label">Bootstrap_New_Line</td>
 <td class="address-1"><span id="23361"></span>23361</td>
 <td class="instruction">DEFW 9999</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23363"></span>23363</td>
-<td class="instruction">DEFB 255,255,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23371"></span>23371</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23379"></span>23379</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23387"></span>23387</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23395"></span>23395</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23403"></span>23403</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23411"></span>23411</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23419"></span>23419</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23427"></span>23427</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23435"></span>23435</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23443"></span>23443</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23451"></span>23451</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23459"></span>23459</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23467"></span>23467</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23475"></span>23475</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23483"></span>23483</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23491"></span>23491</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23499"></span>23499</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23507"></span>23507</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23515"></span>23515</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23523"></span>23523</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23531"></span>23531</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23539"></span>23539</td>
-<td class="instruction">DEFB 0,0,0,0,0,0,0,0</td>
-<td class="comment-1" rowspan="1"></td>
-</tr>
-<tr>
-<td class="asm-label"></td>
-<td class="address-1"><span id="23547"></span>23547</td>
-<td class="instruction">DEFB 0,0,0,0,0</td>
 <td class="comment-1" rowspan="1"></td>
 </tr>
 </table>

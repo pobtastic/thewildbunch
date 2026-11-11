@@ -90,47 +90,175 @@ gtag('config', 'G-75RERFCHBG');
 </tr>
 </table>
 <ul class="contents">
-<li><a href="#plot_and_draw_art">Plot And Draw Art</a></li>
+<li><a href="#gunfight_sequence">Gunfight Sequence</a></li>
+<li><a href="#town_map">Town Map</a></li>
+<li><a href="#top_grade_screen">Top Grade Screen</a></li>
+<li><a href="#prisoner_screen">Prisoner Screen</a></li>
+<li><a href="#r.i.p._screen">R.I.P. Screen</a></li>
+<li><a href="#wanted_posters">Wanted Posters</a></li>
+<li><a href="#wanted-poster_face_overlays">Wanted-Poster Face Overlays</a></li>
 </ul>
-<div><span id="plot_and_draw_art"></span></div>
+<div><span id="gunfight_sequence"></span></div>
 <div class="box box-1">
-<div class="box-title">Plot And Draw Art</div>
+<div class="box-title">Gunfight Sequence</div>
 <div class="paragraph">
-<p>These pictures are drawn with BASIC <code>PLOT</code> /
-<code>DRAW</code> / <code>CIRCLE</code>. The coordinate tables are at
-<a href="../asm/62240.html">Plot_Points</a>, <a href="../asm/62298.html">Draw_Segments_Top_Grade</a> and <a href="../asm/62331.html">Draw_Segments_Ending</a>; the follow-on strokes live in BASIC lines
-320, 7010-7065, 9800 and 9870/9871. PNGs are built by
-<code>utils/render_wildbunch_graphics.py</code>.</p>
+Four custom-<code>CHARS</code> <code>PRINT</code> layers (lines 5019-5120),
+then cowboy frames at 5200/5250 and the hit overlay at 5300-5305.
 </div>
 <div class="paragraph">
 <table>
-<tr><th>Line 320 flourishes</th></tr>
 <tr>
-<td><img src="../images/line-320-flourishes.png" alt="Line 320 flourishes"/></td>
+<th>Ready (5120)</th>
+<th>Drawing... (5200)</th>
+</tr>
+<tr>
+<td><img src="../../images/gunfight.png" alt="Gunfight ready"/></td>
+<td><img src="../../images/gunfight-draw1.png" alt="Gunfight drawing"/></td>
+</tr>
+<tr>
+<th>Shooting (5250)</th>
+<th>Hit — AAAGGH! (5300-5305)</th>
+</tr>
+<tr>
+<td><img src="../../images/gunfight-draw2.png" alt="Gunfight shooting"/></td>
+<td><img src="../../images/gunfight-aaaggh.png" alt="Gunfight AAAGGH"/></td>
 </tr>
 </table>
 </div>
+</div>
+<div><span id="town_map"></span></div>
+<div class="box box-2">
+<div class="box-title">Town Map</div>
 <div class="paragraph">
-<table>
-<tr><th>Top grade badge (line 9800 / <a href="../asm/62298.html">Draw_Segments_Top_Grade</a>)</th></tr>
-<tr>
-<td><img src="../images/top-grade.png" alt="Top grade badge"/></td>
-</tr>
-</table>
+Lines 310-325 (<code>~</code> border, <code>_</code> cacti, compass).
 </div>
 <div class="paragraph">
 <table>
-<tr><th>Ending portrait (lines 9870-9871 / <a href="../asm/62331.html">Draw_Segments_Ending</a>, <a href="../asm/62240.html">Plot_Points</a>)</th></tr>
 <tr>
-<td><img src="../images/ending.png" alt="Ending portrait"/></td>
+<td><img src="../../images/town-map.png" alt="Town map"/></td>
 </tr>
 </table>
 </div>
+</div>
+<div><span id="top_grade_screen"></span></div>
+<div class="box box-1">
+<div class="box-title">Top Grade Screen</div>
+<div class="paragraph">
+Lines 9800 / <a href="../asm/62298.html">Draw_Segments_Top_Grade</a> and 9525.
+</div>
 <div class="paragraph">
 <table>
-<tr><th>Wanted-poster face (lines 7010-7065)</th></tr>
 <tr>
-<td><img src="../images/wanted-face.png" alt="Wanted-poster face"/></td>
+<td><img src="../../images/top-grade.png" alt="Top grade screen"/></td>
+</tr>
+</table>
+</div>
+</div>
+<div><span id="prisoner_screen"></span></div>
+<div class="box box-2">
+<div class="box-title">Prisoner Screen</div>
+<div class="paragraph">
+Lines 9870-9871 / <a href="../asm/62331.html">Draw_Segments_Ending</a>, <a href="../asm/62240.html">Plot_Points</a> and 9525.
+</div>
+<div class="paragraph">
+<table>
+<tr>
+<td><img src="../../images/ending.png" alt="Prisoner screen"/></td>
+</tr>
+</table>
+</div>
+</div>
+<div><span id="r.i.p._screen"></span></div>
+<div class="box box-1">
+<div class="box-title">R.I.P. Screen</div>
+<div class="paragraph">
+Lines 9850 and 9525.
+</div>
+<div class="paragraph">
+<table>
+<tr>
+<td><img src="../../images/rip.png" alt="R.I.P. screen"/></td>
+</tr>
+</table>
+</div>
+</div>
+<div><span id="wanted_posters"></span></div>
+<div class="box box-2">
+<div class="box-title">Wanted Posters</div>
+<div class="paragraph">
+Lines 7000-7140. The face is shared; <code>D$(L)</code> selects extras
+(patch, scar, moustache, missing ear, &amp;c. — DATA at 9001-9012).
+</div>
+<div class="paragraph">
+<table>
+<tr>
+<th>Harry Longbough (L=2, limp)</th>
+<th>Harvey Logan (L=3, eyepatch)</th>
+</tr>
+<tr>
+<td><img src="../../images/wanted-poster.png" alt="Wanted poster Longbough"/></td>
+<td><img src="../../images/wanted-poster-eyepatch.png" alt="Wanted poster Logan eyepatch"/></td>
+</tr>
+</table>
+</div>
+</div>
+<div><span id="wanted-poster_face_overlays"></span></div>
+<div class="box box-1">
+<div class="box-title">Wanted-Poster Face Overlays</div>
+<div class="paragraph">
+Base face (lines 7010-7065) plus <code>D$(L)</code> extras from DATA
+9001-9012. Limps (left/right) only change the DESCRIPTION text — the face
+is unchanged.
+</div>
+<div class="paragraph">
+<table>
+<tr>
+<th>Base</th>
+<th>Moustache</th>
+</tr>
+<tr>
+<td><img src="../../images/wanted-face.png" alt="Base face"/></td>
+<td><img src="../../images/wanted-face-a-moustache.png" alt="Moustache"/></td>
+</tr>
+<tr>
+<th>Patch on right eye</th>
+<th>Patch on left eye</th>
+</tr>
+<tr>
+<td><img src="../../images/wanted-face-patch-on-right-eye.png" alt="Patch on right eye"/></td>
+<td><img src="../../images/wanted-face-patch-on-left-eye.png" alt="Patch on left eye"/></td>
+</tr>
+<tr>
+<th>Scar on left cheek</th>
+<th>Scar on right cheek</th>
+</tr>
+<tr>
+<td><img src="../../images/wanted-face-scar-on-left-cheek.png" alt="Scar on left cheek"/></td>
+<td><img src="../../images/wanted-face-scar-on-right-cheek.png" alt="Scar on right cheek"/></td>
+</tr>
+<tr>
+<th>No left ear</th>
+<th>No right ear</th>
+</tr>
+<tr>
+<td><img src="../../images/wanted-face-no-left-ear.png" alt="No left ear"/></td>
+<td><img src="../../images/wanted-face-no-right-ear.png" alt="No right ear"/></td>
+</tr>
+<tr>
+<th>No eyebrows</th>
+<th>Left earring</th>
+</tr>
+<tr>
+<td><img src="../../images/wanted-face-no-eyebrows.png" alt="No eyebrows"/></td>
+<td><img src="../../images/wanted-face-a-left-earing.png" alt="Left earring"/></td>
+</tr>
+<tr>
+<th>Right earring</th>
+<th></th>
+</tr>
+<tr>
+<td><img src="../../images/wanted-face-a-right-earing.png" alt="Right earring"/></td>
+<td></td>
 </tr>
 </table>
 </div>
