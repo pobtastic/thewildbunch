@@ -17,16 +17,24 @@ i $5B00
 
 b $5B01 Bootstrap Workspace
 @ $5B01 label=Bootstrap_Workspace
-D $5B01 Workspace for #R$E933. The first #N$3E bytes are copied over
-. #SKOOLKID$5C53(PROG); the following words feed reclaim and NEWPPC.
-  $5B01,$3E Bytes copied over #SKOOLKID$5C53(PROG).
+D $5B01 Tape payload for #R$E933. The first #N$3E bytes replace the decoy
+. line at #SKOOLKID$5C53(PROG) with the opening of BASIC line #N$15; the
+. two words that follow feed reclaim and #SKOOLKID$5C42(NEWPPC).
+N $5B01 BASIC line header (big-endian line number, little-endian length).
+  $5B01,$02 Line number #N$000F (#N$15).
+  $5B03,$02 Length #N$006F (body continues past this copy into PROG).
+N $5B05 Start of line #N$15 body (tokens), copied over PROG:
+. #HTML(<code>PAPER R: CLS: PRINT AT 6,9;"HOWDY PARDNER!": PRINT: PRINT
+. TAB 4;"WHAT "</code>).
+  $5B05,$3A
 N $5B3F End address for #SKOOLKID$19E5(RECLAIM-1), read at #R$E974.
 @ $5B3F label=Bootstrap_Reclaim_End
 W $5B3F,$02
-N $5B41 Line number written to #SKOOLKID$5C42(NEWPPC).
+N $5B41 Line number written to #SKOOLKID$5C42(NEWPPC) (#N$270F = 9999).
 @ $5B41 label=Bootstrap_New_Line
 W $5B41,$02
-  $5B43,$BD
+
+i $5B43
 
 i $5C00
 
@@ -35,8 +43,8 @@ b $5CCB BASIC Program
 D $5CCB The game is mostly Sinclair BASIC. See the recovered listing on the
 . #LINK(Basic)(BASIC listing) page. #HTML(<code>LIST</code> only shows line 1;
 . line 15's header is corrupted on the tape so listing stops. The program
-. still runs. Line 1 does <code>RANDOMIZE USR (VARS-#N$74)</code> — digits
-. show #N($8C), hidden float #N$74 — entering #R$E933.)
+. still runs. Line 1 does <code>RANDOMIZE USR (VARS-#N$74)</code> digits
+. show #N($8C), hidden float #N$74 entering #R$E933.)
   $5CCB,$3B Line 1: RANDOMIZE USR ((PEEK 23627)+((PEEK 23628)*256)-116).
 N $5D06 Corrupted line 15 (LIST protection).
   $5D06,$38 #HTML(<code>LIST</code> stops here: the line-number high byte is
@@ -1062,29 +1070,29 @@ D $F37B Twenty-nine PLOT/DRAW segments (#N$04 bytes each) used by BASIC
 u $F3EF
   $F3EF,$08
 
-b $F3F7 Gunfight Character Set #N$01
-@ $F3F7 label=Gunfight_Charset_1
-D $F3F7 Ninety-six glyphs (codes #N$20-#N$7F) drawn by the street-fight
-. sequence. BASIC line 5019 sets #SKOOLKID$5C36(CHARS) to #N$F2F7 so
-. character code #N$20 reads from here.
+b $F3F7 Glyphs #N$01
+@ $F3F7 label=Glyphs_1
+D $F3F7 Ninety-six glyphs (codes #N$20-#N$7F). BASIC line 5019 sets
+. #SKOOLKID$5C36(CHARS) to #N$F2F7 so character code #N$20 reads from
+. here (gunfight street layer 1).
   $F3F7,$08 #UDGTABLE(default,centre,centre)
 . { #N($20+(#PC-$F3F7)/$08) | #UDG(#PC) } UDGTABLE#
 L $F3F7,$08,$60
 
-b $F6F7 Gunfight Character Set #N$02
-@ $F6F7 label=Gunfight_Charset_2
-D $F6F7 Ninety-six glyphs (codes #N$20-#N$7F) drawn by the street-fight
-. sequence. BASIC line 5030 sets #SKOOLKID$5C36(CHARS) to #N$F5F7 so
-. character code #N$20 reads from here.
+b $F6F7 Glyphs #N$02
+@ $F6F7 label=Glyphs_2
+D $F6F7 Ninety-six glyphs (codes #N$20-#N$7F). BASIC line 5030 sets
+. #SKOOLKID$5C36(CHARS) to #N$F5F7 so character code #N$20 reads from
+. here (gunfight street layer 2).
   $F6F7,$08 #UDGTABLE(default,centre,centre)
 . { #N($20+(#PC-$F6F7)/$08) | #UDG(#PC) } UDGTABLE#
 L $F6F7,$08,$60
 
-b $F9F7 Gunfight Character Set #N$03
-@ $F9F7 label=Gunfight_Charset_3
-D $F9F7 Ninety-six glyphs (codes #N$20-#N$7F) drawn by the street-fight
-. sequence. BASIC line 5050 sets #SKOOLKID$5C36(CHARS) to #N$F8F7 so
-. character code #N$20 reads from here.
+b $F9F7 Glyphs #N$03
+@ $F9F7 label=Glyphs_3
+D $F9F7 Ninety-six glyphs (codes #N$20-#N$7F). BASIC line 5050 sets
+. #SKOOLKID$5C36(CHARS) to #N$F8F7 so character code #N$20 reads from
+. here (gunfight street layer 3).
   $F9F7,$08 #UDGTABLE(default,centre,centre)
 . { #N($20+(#PC-$F9F7)/$08) | #UDG(#PC) } UDGTABLE#
 L $F9F7,$08,$60
@@ -1092,12 +1100,13 @@ L $F9F7,$08,$60
 u $FCF7
   $FCF7,$07
 
-b $FCFE Gunfight Character Set #N$04
-@ $FCFE label=Gunfight_Charset_4
-D $FCFE Ninety-six glyphs (codes #N$20-#N$7F) drawn by the street-fight
-. sequence. BASIC line 5070 sets #SKOOLKID$5C36(CHARS) to #N$FBFE so
-. character code #N$20 reads from here. Occupies the top of RAM,
-. overlapping the Spectrum's default UDG area.
+b $FCFE Glyphs #N$04
+@ $FCFE label=Glyphs_4
+D $FCFE Ninety-six glyphs (codes #N$20-#N$7F). BASIC line 5070 sets
+. #SKOOLKID$5C36(CHARS) to #N$FBFE so character code #N$20 reads from
+. here. Also used as the game font (map symbols, poker text, &amp;c.).
+. Occupies the top of RAM, overlapping the Spectrum's default UDG
+. area.
   $FCFE,$08 #UDGTABLE(default,centre,centre)
 . { #N($20+(#PC-$FCFE)/$08) | #UDG(#PC) } UDGTABLE#
 L $FCFE,$08,$60

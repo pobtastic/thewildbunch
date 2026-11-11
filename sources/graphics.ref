@@ -1,36 +1,145 @@
 ; Copyright 2026 Paul Maddern (paul@arcadegeek.co.uk)
 
-[Graphics:Gunfight Character Sets]
-#HTML(<p>The street-fight sequence — BASIC lines 5019-5070 — re-points
-<code>CHARS</code> at four custom character sets above <code>RAMTOP</code>
-and <code>PRINT</code>s them as layered tiles to build the gunfight graphic.
-Each set is documented glyph-by-glyph at the addresses below; the sheets are
-the 96 glyphs from code 32 to 127.</p>)
+[Graphics:Gunfight Sequence]
+Four custom-<code>CHARS</code> <code>PRINT</code> layers (lines 5019-5120),
+then cowboy frames at 5200/5250 and the hit overlay at 5300-5305.
 
-#UDGTABLE
-  { =h Character set 1 (CHARS=#N$F2F7; #R$F3F7) }
-  { #FONT$F3F7,96,attr=$07,scale=$02(gunfight-charset-1) }
-UDGTABLE#
+#HTML(
+<table>
+  <tr>
+    <th>Ready (5120)</th>
+    <th>Drawing... (5200)</th>
+  </tr>
+  <tr>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/gunfight.png" alt="Gunfight ready"/></td>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/gunfight-draw1.png" alt="Gunfight drawing"/></td>
+  </tr>
+  <tr>
+    <th>Shooting (5250)</th>
+    <th>Hit — AAAGGH! (5300-5305)</th>
+  </tr>
+  <tr>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/gunfight-draw2.png" alt="Gunfight shooting"/></td>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/gunfight-aaaggh.png" alt="Gunfight AAAGGH"/></td>
+  </tr>
+</table>
+)
 
-#UDGTABLE
-  { =h Character set 2 (CHARS=#N$F5F7; #R$F6F7) }
-  { #FONT$F6F7,96,attr=$07,scale=$02(gunfight-charset-2) }
-UDGTABLE#
+[Graphics:Town Map]
+Lines 310-325 (<code>~</code> border, <code>_</code> cacti, compass).
 
-#UDGTABLE
-  { =h Character set 3 (CHARS=#N$F8F7; #R$F9F7) }
-  { #FONT$F9F7,96,attr=$07,scale=$02(gunfight-charset-3) }
-UDGTABLE#
+#HTML(
+<table>
+  <tr>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/town-map.png" alt="Town map"/></td>
+  </tr>
+</table>
+)
 
-#UDGTABLE
-  { =h Character set 4 (CHARS=#N$FBFE; #R$FCFE) }
-  { #FONT$FCFE,96,attr=$07,scale=$02(gunfight-charset-4) }
-UDGTABLE#
+[Graphics:Top Grade Screen]
+Lines 9800 / #R$F35A and 9525.
 
-[Graphics:Plot And Draw Art]
-#HTML(<p>Other pictures in the game — the town map flourishes, wanted-poster
-face, tombstone / badge endings, and so on — are drawn with BASIC
-<code>PLOT</code> / <code>DRAW</code> / <code>CIRCLE</code>, often from
-the coordinate tables at #R$F320, #R$F35A and #R$F37B. Those are vector
-sequences rather than bitmap tiles, so they are not shown as images
-here.</p>)
+#HTML(
+<table>
+  <tr>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/top-grade.png" alt="Top grade screen"/></td>
+  </tr>
+</table>
+)
+
+[Graphics:Prisoner Screen]
+Lines 9870-9871 / #R$F37B, #R$F320 and 9525.
+
+#HTML(
+<table>
+  <tr>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/ending.png" alt="Prisoner screen"/></td>
+  </tr>
+</table>
+)
+
+[Graphics:R.I.P. Screen]
+Lines 9850 and 9525.
+
+#HTML(
+<table>
+  <tr>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/rip.png" alt="R.I.P. screen"/></td>
+  </tr>
+</table>
+)
+
+[Graphics:Wanted Posters]
+Lines 7000-7140. The face is shared; <code>D$(L)</code> selects extras
+(patch, scar, moustache, missing ear, &amp;c. — DATA at 9001-9012).
+
+#HTML(
+<table>
+  <tr>
+    <th>Harry Longbough (L=2, limp)</th>
+    <th>Harvey Logan (L=3, eyepatch)</th>
+  </tr>
+  <tr>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/wanted-poster.png" alt="Wanted poster Longbough"/></td>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/wanted-poster-eyepatch.png" alt="Wanted poster Logan eyepatch"/></td>
+  </tr>
+</table>
+)
+
+[Graphics:Wanted-Poster Face Overlays]
+Base face (lines 7010-7065) plus <code>D$(L)</code> extras from DATA
+9001-9012. Limps (left/right) only change the DESCRIPTION text — the face
+is unchanged.
+
+#HTML(
+<table>
+  <tr>
+    <th>Base</th>
+    <th>Moustache</th>
+  </tr>
+  <tr>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/wanted-face.png" alt="Base face"/></td>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/wanted-face-a-moustache.png" alt="Moustache"/></td>
+  </tr>
+  <tr>
+    <th>Patch on right eye</th>
+    <th>Patch on left eye</th>
+  </tr>
+  <tr>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/wanted-face-patch-on-right-eye.png" alt="Patch on right eye"/></td>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/wanted-face-patch-on-left-eye.png" alt="Patch on left eye"/></td>
+  </tr>
+  <tr>
+    <th>Scar on left cheek</th>
+    <th>Scar on right cheek</th>
+  </tr>
+  <tr>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/wanted-face-scar-on-left-cheek.png" alt="Scar on left cheek"/></td>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/wanted-face-scar-on-right-cheek.png" alt="Scar on right cheek"/></td>
+  </tr>
+  <tr>
+    <th>No left ear</th>
+    <th>No right ear</th>
+  </tr>
+  <tr>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/wanted-face-no-left-ear.png" alt="No left ear"/></td>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/wanted-face-no-right-ear.png" alt="No right ear"/></td>
+  </tr>
+  <tr>
+    <th>No eyebrows</th>
+    <th>Left earring</th>
+  </tr>
+  <tr>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/wanted-face-no-eyebrows.png" alt="No eyebrows"/></td>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/wanted-face-a-left-earing.png" alt="Left earring"/></td>
+  </tr>
+  <tr>
+    <th>Right earring</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><img src="../#IF({vars[pub]}>2)(../)images/wanted-face-a-right-earing.png" alt="Right earring"/></td>
+    <td></td>
+  </tr>
+</table>
+)

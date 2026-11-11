@@ -229,47 +229,36 @@ i$5B00
 
 ; Bootstrap Workspace
 ;
-; Workspace for #R$E933. The first #N$3E bytes are copied over
-; #SKOOLKID$5C53(PROG); the following words feed reclaim and NEWPPC.
+; Tape payload for #R$E933. The first #N$3E bytes replace the decoy
+; line at #SKOOLKID$5C53(PROG) with the opening of BASIC line #N$15; the
+; two words that follow feed reclaim and #SKOOLKID$5C42(NEWPPC).
+;
+; .
+;
+; BASIC line header (big-endian line number, little-endian length).
 @label=Bootstrap_Workspace
-b$5B01 DEFB $00,$0F,$6F,$00,$DA,$52,$3A,$FB ; {Bytes copied over
- $5B09 DEFB $3A,$F5,$AC,$36,$0E,$00,$00,$06 ; #SKOOLKID$5C53(PROG).
- $5B11 DEFB $00,$00,$2C,$39,$0E,$00,$00,$09 ;
- $5B19 DEFB $00,$00,$3B,$22,$48,$4F,$57,$44 ;
- $5B21 DEFB $59,$20,$50,$41,$52,$44,$4E,$45 ;
- $5B29 DEFB $52,$21,$22,$3A,$F5,$3A,$F5,$AD ;
- $5B31 DEFB $34,$0E,$00,$00,$04,$00,$00,$3B ;
- $5B39 DEFB $22,$57,$48,$41,$54,$20         ; }
+b$5B01 DEFB $00,$0F                         ; Line number #N$000F (#N$15).
+ $5B03 DEFB $6F,$00                         ; Length #N$006F (body continues
+                                            ; past this copy into PROG).
+; Start of line #N$15 body (tokens), copied over PROG:
+; #HTML(<code>PAPER R: CLS: PRINT AT 6,9;"HOWDY PARDNER!": PRINT: PRINT
+; TAB 4;"WHAT "</code>).
+ $5B05 DEFB $DA,$52,$3A,$FB,$3A,$F5,$AC,$36
+ $5B0D DEFB $0E,$00,$00,$06,$00,$00,$2C,$39
+ $5B15 DEFB $0E,$00,$00,$09,$00,$00,$3B,$22
+ $5B1D DEFB $48,$4F,$57,$44,$59,$20,$50,$41
+ $5B25 DEFB $52,$44,$4E,$45,$52,$21,$22,$3A
+ $5B2D DEFB $F5,$3A,$F5,$AD,$34,$0E,$00,$00
+ $5B35 DEFB $04,$00,$00,$3B,$22,$57,$48,$41
+ $5B3D DEFB $54,$20
 ; End address for #SKOOLKID$19E5(RECLAIM-1), read at #R$E974.
 @label=Bootstrap_Reclaim_End
  $5B3F DEFW $0000
-; Line number written to #SKOOLKID$5C42(NEWPPC).
+; Line number written to #SKOOLKID$5C42(NEWPPC) (#N$270F = 9999).
 @label=Bootstrap_New_Line
  $5B41 DEFW $270F
- $5B43 DEFB $FF,$FF,$00,$00,$00,$00,$00,$00
- $5B4B DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5B53 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5B5B DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5B63 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5B6B DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5B73 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5B7B DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5B83 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5B8B DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5B93 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5B9B DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5BA3 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5BAB DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5BB3 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5BBB DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5BC3 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5BCB DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5BD3 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5BDB DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5BE3 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5BEB DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5BF3 DEFB $00,$00,$00,$00,$00,$00,$00,$00
- $5BFB DEFB $00,$00,$00,$00,$00
+
+i$5B43
 
 i$5C00
 
@@ -278,8 +267,8 @@ i$5C00
 ; The game is mostly Sinclair BASIC. See the recovered listing on the
 ; #LINK(Basic)(BASIC listing) page. #HTML(<code>LIST</code> only shows line 1;
 ; line 15's header is corrupted on the tape so listing stops. The program
-; still runs. Line 1 does <code>RANDOMIZE USR (VARS-#N$74)</code> — digits
-; show #N($8C), hidden float #N$74 — entering #R$E933.)
+; still runs. Line 1 does <code>RANDOMIZE USR (VARS-#N$74)</code> digits
+; show #N($8C), hidden float #N$74 entering #R$E933.)
 @label=BasicProgram
 b$5CCB DEFB $00,$01,$37,$00,$08,$08,$08,$08 ; {Line 1: RANDOMIZE USR ((PEEK
  $5CD3 DEFB $08,$11,$07,$10,$07,$F9,$C0,$28 ; 23627)+((PEEK 23628)*256)-116).
@@ -5514,12 +5503,12 @@ b$F37B DEFB $6B,$60,$00,$14
 ; Unused
 u$F3EF DEFB $00,$00,$00,$00,$00,$00,$F8,$07
 
-; Gunfight Character Set #N$01
+; Glyphs #N$01
 ;
-; Ninety-six glyphs (codes #N$20-#N$7F) drawn by the street-fight
-; sequence. BASIC line 5019 sets #SKOOLKID$5C36(CHARS) to #N$F2F7 so
-; character code #N$20 reads from here.
-@label=Gunfight_Charset_1
+; Ninety-six glyphs (codes #N$20-#N$7F). BASIC line 5019 sets
+; #SKOOLKID$5C36(CHARS) to #N$F2F7 so character code #N$20 reads from
+; here (gunfight street layer 1).
+@label=Glyphs_1
 b$F3F7 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE(default,centre,centre)
                                             ; { #N($20+(#PC-$F3F7)/$08) | #UDG(#PC) } UDGTABLE#
  $F3FF DEFB $01,$01,$01,$01,$01,$01,$01,$01 ; #UDGTABLE(default,centre,centre)
@@ -5713,12 +5702,12 @@ b$F3F7 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE(default,centre,centre)
  $F6EF DEFB $3F,$1F,$07,$03,$00,$00,$00,$00 ; #UDGTABLE(default,centre,centre)
                                             ; { #N($20+(#PC-$F3F7)/$08) | #UDG(#PC) } UDGTABLE#
 
-; Gunfight Character Set #N$02
+; Glyphs #N$02
 ;
-; Ninety-six glyphs (codes #N$20-#N$7F) drawn by the street-fight
-; sequence. BASIC line 5030 sets #SKOOLKID$5C36(CHARS) to #N$F5F7 so
-; character code #N$20 reads from here.
-@label=Gunfight_Charset_2
+; Ninety-six glyphs (codes #N$20-#N$7F). BASIC line 5030 sets
+; #SKOOLKID$5C36(CHARS) to #N$F5F7 so character code #N$20 reads from
+; here (gunfight street layer 2).
+@label=Glyphs_2
 b$F6F7 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE(default,centre,centre)
                                             ; { #N($20+(#PC-$F6F7)/$08) | #UDG(#PC) } UDGTABLE#
  $F6FF DEFB $00,$00,$00,$00,$80,$80,$80,$80 ; #UDGTABLE(default,centre,centre)
@@ -5912,12 +5901,12 @@ b$F6F7 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE(default,centre,centre)
  $F9EF DEFB $00,$00,$00,$00,$00,$00,$00,$07 ; #UDGTABLE(default,centre,centre)
                                             ; { #N($20+(#PC-$F6F7)/$08) | #UDG(#PC) } UDGTABLE#
 
-; Gunfight Character Set #N$03
+; Glyphs #N$03
 ;
-; Ninety-six glyphs (codes #N$20-#N$7F) drawn by the street-fight
-; sequence. BASIC line 5050 sets #SKOOLKID$5C36(CHARS) to #N$F8F7 so
-; character code #N$20 reads from here.
-@label=Gunfight_Charset_3
+; Ninety-six glyphs (codes #N$20-#N$7F). BASIC line 5050 sets
+; #SKOOLKID$5C36(CHARS) to #N$F8F7 so character code #N$20 reads from
+; here (gunfight street layer 3).
+@label=Glyphs_3
 b$F9F7 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE(default,centre,centre)
                                             ; { #N($20+(#PC-$F9F7)/$08) | #UDG(#PC) } UDGTABLE#
  $F9FF DEFB $E3,$E3,$E3,$E3,$E7,$FF,$FF,$FF ; #UDGTABLE(default,centre,centre)
@@ -6114,13 +6103,14 @@ b$F9F7 DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE(default,centre,centre)
 ; Unused
 u$FCF7 DEFB $00,$00,$00,$00,$00,$00,$00
 
-; Gunfight Character Set #N$04
+; Glyphs #N$04
 ;
-; Ninety-six glyphs (codes #N$20-#N$7F) drawn by the street-fight
-; sequence. BASIC line 5070 sets #SKOOLKID$5C36(CHARS) to #N$FBFE so
-; character code #N$20 reads from here. Occupies the top of RAM,
-; overlapping the Spectrum's default UDG area.
-@label=Gunfight_Charset_4
+; Ninety-six glyphs (codes #N$20-#N$7F). BASIC line 5070 sets
+; #SKOOLKID$5C36(CHARS) to #N$FBFE so character code #N$20 reads from
+; here. Also used as the game font (map symbols, poker text, &amp;c.).
+; Occupies the top of RAM, overlapping the Spectrum's default UDG
+; area.
+@label=Glyphs_4
 b$FCFE DEFB $00,$00,$00,$00,$00,$00,$00,$00 ; #UDGTABLE(default,centre,centre)
                                             ; { #N($20+(#PC-$FCFE)/$08) | #UDG(#PC) } UDGTABLE#
  $FD06 DEFB $00,$10,$10,$10,$10,$00,$10,$00 ; #UDGTABLE(default,centre,centre)
