@@ -1186,15 +1186,15 @@ def render_wanted_poster(mem, variant='longbough'):
     for row, col, text in spec['body']:
         d.print_at(row, col, text, paper=7)
 
-    # Line 7140 INPUT uses the lower screen; screenshot shows a red strip.
-    for row in (21, 22, 23):
+    # After DESCRIPTION: blank white row, blank red row, then INPUT prompt.
+    for row in (22, 23):
         for col in range(32):
             d.attrs[row][col] = (2, 7, False)
             for dy in range(8):
                 for dx in range(8):
                     d.pixels[row * 8 + dy][col * 8 + dx] = 0
-    d.print_at(22, 3, 'PRESS ENTER TO CONTINUE', paper=2, ink=7)
-    d.print_char(143, row=22, col=26, paper=2, ink=7)
+    d.print_at(23, 3, 'PRESS ENTER TO CONTINUE', paper=2, ink=7)
+    d.print_char(143, row=23, col=26, paper=2, ink=7)
     return d
 
 
