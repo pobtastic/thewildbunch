@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>The Wild Bunch: Data at F35A</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="The Wild Bunch: Data at F35A. Complete ZX Spectrum RAM disassembly." />
+<meta property="og:title" content="The Wild Bunch: Data at F35A" />
+<meta property="og:description" content="The Wild Bunch: Data at F35A. Complete ZX Spectrum RAM disassembly." />
+<meta property="og:site_name" content="ArcadeGeek" />
+<meta property="og:type" content="article" />
+<link rel="canonical" href="https://skoolkit.arcadegeek.co.uk/thewildbunch/asm/62298.html" />
+<meta property="og:url" content="https://skoolkit.arcadegeek.co.uk/thewildbunch/asm/62298.html" />
+<meta property="og:image" content="https://skoolkit.arcadegeek.co.uk/thewildbunch/images/logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@graph": [
+{
+"@type": "WebSite",
+"@id": "https://skoolkit.arcadegeek.co.uk/#website",
+"name": "ArcadeGeek",
+"url": "https://skoolkit.arcadegeek.co.uk/"
+},
+{
+"@type": "TechArticle",
+"headline": "The Wild Bunch: Data at F35A",
+"name": "The Wild Bunch: Data at F35A",
+"description": "The Wild Bunch: Data at F35A. Complete ZX Spectrum RAM disassembly.",
+"inLanguage": "en",
+"isPartOf": {"@id": "https://skoolkit.arcadegeek.co.uk/#website"},
+"author": {
+"@type": "Organization",
+"name": "ArcadeGeek",
+"url": "https://www.arcadegeek.co.uk/"
+},
+"about": {
+"@type": "VideoGame",
+"name": "The Wild Bunch",
+"gamePlatform": "ZX Spectrum"
+}
+,"url": "https://skoolkit.arcadegeek.co.uk/thewildbunch/asm/62298.html"
+,"image": "https://skoolkit.arcadegeek.co.uk/thewildbunch/images/logo.png"
+},
+{
+"@type": "BreadcrumbList",
+"itemListElement": [
+{
+"@type": "ListItem",
+"position": 1,
+"name": "ArcadeGeek",
+"item": "https://skoolkit.arcadegeek.co.uk/"
+},
+{
+"@type": "ListItem",
+"position": 2,
+"name": "The Wild Bunch"
+,"item": "https://skoolkit.arcadegeek.co.uk/thewildbunch/"
+}
+,{
+"@type": "ListItem",
+"position": 3,
+"name": "Data at F35A"
+,"item": "https://skoolkit.arcadegeek.co.uk/thewildbunch/asm/62298.html"
+}
+]
+}
+]
+}
+</script>
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-b">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Data</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="62296.html">F358</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#f35a">Map</a></td>
+<td class="next">
+Next: <a href="62330.html">F37A</a>
+</td>
+</tr>
+</table>
+<div class="description">F35A: Draw Segments</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+Eight PLOT/DRAW segments (04 bytes each: plot X, plot Y, draw X, draw Y) used by BASIC line 9800 via GO SUB 9900 with T=8.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Draw_Segments_Top_Grade</td>
+<td class="address-1"><span id="f35a"></span>F35A</td>
+<td class="instruction">DEFB $49,$89,$22,$00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f35e"></span>F35E</td>
+<td class="instruction">DEFB $6B,$89,$10,$1C</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f362"></span>F362</td>
+<td class="instruction">DEFB $49,$4E,$11,$1D</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f366"></span>F366</td>
+<td class="instruction">DEFB $49,$4E,$22,$00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f36a"></span>F36A</td>
+<td class="instruction">DEFB $7B,$30,$10,$1E</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f36e"></span>F36E</td>
+<td class="instruction">DEFB $9C,$6B,$11,$1D</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f372"></span>F372</td>
+<td class="instruction">DEFB $8B,$89,$22,$00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="f376"></span>F376</td>
+<td class="instruction">DEFB $8B,$4E,$22,$00</td>
+<td class="comment-0" rowspan="1"></td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="62296.html">F358</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#f35a">Map</a></td>
+<td class="next">
+Next: <a href="62330.html">F37A</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird Software Ltd<br />&copy; 2026 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.2.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/thewildbunch/">Source code</a>.</div>
+<div><a href="../dec/asm/402072.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

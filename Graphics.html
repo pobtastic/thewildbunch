@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>The Wild Bunch: Graphics</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="The Wild Bunch: Graphics. Complete ZX Spectrum RAM disassembly." />
+<meta property="og:title" content="The Wild Bunch: Graphics" />
+<meta property="og:description" content="The Wild Bunch: Graphics. Complete ZX Spectrum RAM disassembly." />
+<meta property="og:site_name" content="ArcadeGeek" />
+<meta property="og:type" content="article" />
+<link rel="canonical" href="https://skoolkit.arcadegeek.co.uk/thewildbunch/Graphics.html" />
+<meta property="og:url" content="https://skoolkit.arcadegeek.co.uk/thewildbunch/Graphics.html" />
+<meta property="og:image" content="https://skoolkit.arcadegeek.co.uk/thewildbunch/images/logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@graph": [
+{
+"@type": "WebSite",
+"@id": "https://skoolkit.arcadegeek.co.uk/#website",
+"name": "ArcadeGeek",
+"url": "https://skoolkit.arcadegeek.co.uk/"
+},
+{
+"@type": "TechArticle",
+"headline": "The Wild Bunch: Graphics",
+"name": "The Wild Bunch: Graphics",
+"description": "The Wild Bunch: Graphics. Complete ZX Spectrum RAM disassembly.",
+"inLanguage": "en",
+"isPartOf": {"@id": "https://skoolkit.arcadegeek.co.uk/#website"},
+"author": {
+"@type": "Organization",
+"name": "ArcadeGeek",
+"url": "https://www.arcadegeek.co.uk/"
+},
+"about": {
+"@type": "VideoGame",
+"name": "The Wild Bunch",
+"gamePlatform": "ZX Spectrum"
+}
+,"url": "https://skoolkit.arcadegeek.co.uk/thewildbunch/Graphics.html"
+,"image": "https://skoolkit.arcadegeek.co.uk/thewildbunch/images/logo.png"
+},
+{
+"@type": "BreadcrumbList",
+"itemListElement": [
+{
+"@type": "ListItem",
+"position": 1,
+"name": "ArcadeGeek",
+"item": "https://skoolkit.arcadegeek.co.uk/"
+},
+{
+"@type": "ListItem",
+"position": 2,
+"name": "The Wild Bunch"
+,"item": "https://skoolkit.arcadegeek.co.uk/thewildbunch/"
+}
+,{
+"@type": "ListItem",
+"position": 3,
+"name": "Graphics"
+,"item": "https://skoolkit.arcadegeek.co.uk/thewildbunch/Graphics.html"
+}
+]
+}
+]
+}
+</script>
+<link rel="stylesheet" type="text/css" href="skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Graphics">
+<table class="header">
+<tr>
+<td class="logo"><a href="index.html"><img alt="logo" src="images/logo.png" /></a></td>
+<td class="page-header">Graphics</td>
+</tr>
+</table>
+<ul class="contents">
+<li><a href="#gunfight_character_sets">Gunfight Character Sets</a></li>
+<li><a href="#plot_and_draw_art">Plot And Draw Art</a></li>
+</ul>
+<div><span id="gunfight_character_sets"></span></div>
+<div class="box box-1">
+<div class="box-title">Gunfight Character Sets</div>
+<div class="paragraph">
+<p>The street-fight sequence — BASIC lines 5019-5070 — re-points
+<code>CHARS</code> at four custom character sets above <code>RAMTOP</code>
+and <code>PRINT</code>s them as layered tiles to build the gunfight graphic.
+Each set is documented glyph-by-glyph at the addresses below; the sheets are
+the 96 glyphs from code 32 to 127.</p>
+</div>
+<div class="paragraph">
+<table class="">
+<tr>
+<th colspan="1" rowspan="1">Character set 1 (CHARS=F2F7; <a href="asm/62455.html">Gunfight_Charset_1</a>)</th>
+</tr>
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="gunfight-charset-1" src="images/font/gunfight-charset-1.png" /></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<table class="">
+<tr>
+<th colspan="1" rowspan="1">Character set 2 (CHARS=F5F7; <a href="asm/63223.html">Gunfight_Charset_2</a>)</th>
+</tr>
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="gunfight-charset-2" src="images/font/gunfight-charset-2.png" /></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<table class="">
+<tr>
+<th colspan="1" rowspan="1">Character set 3 (CHARS=F8F7; <a href="asm/63991.html">Gunfight_Charset_3</a>)</th>
+</tr>
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="gunfight-charset-3" src="images/font/gunfight-charset-3.png" /></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<table class="">
+<tr>
+<th colspan="1" rowspan="1">Character set 4 (CHARS=FBFE; <a href="asm/64766.html">Gunfight_Charset_4</a>)</th>
+</tr>
+<tr>
+<td class="" colspan="1" rowspan="1"><img alt="gunfight-charset-4" src="images/font/gunfight-charset-4.png" /></td>
+</tr>
+</table>
+</div>
+</div>
+<div><span id="plot_and_draw_art"></span></div>
+<div class="box box-2">
+<div class="box-title">Plot And Draw Art</div>
+<div class="paragraph">
+<p>Other pictures in the game — the town map flourishes, wanted-poster
+face, tombstone / badge endings, and so on — are drawn with BASIC
+<code>PLOT</code> / <code>DRAW</code> / <code>CIRCLE</code>, often from
+the coordinate tables at <a href="asm/62240.html">Plot_Points</a>, <a href="asm/62298.html">Draw_Segments_Top_Grade</a> and <a href="asm/62331.html">Draw_Segments_Ending</a>. Those are vector
+sequences rather than bitmap tiles, so they are not shown as images
+here.</p>
+</div>
+</div>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird Software Ltd<br />&copy; 2026 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.2.</div>
+<div class="repository">Link to <a href="https://github.com/pobtastic/thewildbunch/">Source code</a>.</div>
+<div><a href="dec/Graphics.html">Switch to decimal</a>.</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>The Wild Bunch: Graphics</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="The Wild Bunch: Graphics. Complete ZX Spectrum RAM disassembly." />
+<meta property="og:title" content="The Wild Bunch: Graphics" />
+<meta property="og:description" content="The Wild Bunch: Graphics. Complete ZX Spectrum RAM disassembly." />
+<meta property="og:site_name" content="ArcadeGeek" />
+<meta property="og:type" content="article" />
+<link rel="canonical" href="https://skoolkit.arcadegeek.co.uk/thewildbunch/graphics/graphics.html" />
+<meta property="og:url" content="https://skoolkit.arcadegeek.co.uk/thewildbunch/graphics/graphics.html" />
+<meta property="og:image" content="https://skoolkit.arcadegeek.co.uk/thewildbunch/images/logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@graph": [
+{
+"@type": "WebSite",
+"@id": "https://skoolkit.arcadegeek.co.uk/#website",
+"name": "ArcadeGeek",
+"url": "https://skoolkit.arcadegeek.co.uk/"
+},
+{
+"@type": "TechArticle",
+"headline": "The Wild Bunch: Graphics",
+"name": "The Wild Bunch: Graphics",
+"description": "The Wild Bunch: Graphics. Complete ZX Spectrum RAM disassembly.",
+"inLanguage": "en",
+"isPartOf": {"@id": "https://skoolkit.arcadegeek.co.uk/#website"},
+"author": {
+"@type": "Organization",
+"name": "ArcadeGeek",
+"url": "https://www.arcadegeek.co.uk/"
+},
+"about": {
+"@type": "VideoGame",
+"name": "The Wild Bunch",
+"gamePlatform": "ZX Spectrum"
+}
+,"url": "https://skoolkit.arcadegeek.co.uk/thewildbunch/graphics/graphics.html"
+,"image": "https://skoolkit.arcadegeek.co.uk/thewildbunch/images/logo.png"
+},
+{
+"@type": "BreadcrumbList",
+"itemListElement": [
+{
+"@type": "ListItem",
+"position": 1,
+"name": "ArcadeGeek",
+"item": "https://skoolkit.arcadegeek.co.uk/"
+},
+{
+"@type": "ListItem",
+"position": 2,
+"name": "The Wild Bunch"
+,"item": "https://skoolkit.arcadegeek.co.uk/thewildbunch/"
+}
+,{
+"@type": "ListItem",
+"position": 3,
+"name": "Graphics"
+,"item": "https://skoolkit.arcadegeek.co.uk/thewildbunch/graphics/graphics.html"
+}
+]
+}
+]
+}
+</script>
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="async"
+src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Graphics">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Graphics</td>
+</tr>
+</table>
+<ul class="contents">
+<li><a href="#plot_and_draw_art">Plot And Draw Art</a></li>
+</ul>
+<div><span id="plot_and_draw_art"></span></div>
+<div class="box box-1">
+<div class="box-title">Plot And Draw Art</div>
+<div class="paragraph">
+<p>These pictures are drawn with BASIC <code>PLOT</code> /
+<code>DRAW</code> / <code>CIRCLE</code>. The coordinate tables are at
+<a href="../asm/62240.html">Plot_Points</a>, <a href="../asm/62298.html">Draw_Segments_Top_Grade</a> and <a href="../asm/62331.html">Draw_Segments_Ending</a>; the follow-on strokes live in BASIC lines
+320, 7010-7065, 9800 and 9870/9871. PNGs are built by
+<code>utils/render_wildbunch_graphics.py</code>.</p>
+</div>
+<div class="paragraph">
+<table>
+<tr><th>Line 320 flourishes</th></tr>
+<tr>
+<td><img src="../images/line-320-flourishes.png" alt="Line 320 flourishes"/></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<table>
+<tr><th>Top grade badge (line 9800 / <a href="../asm/62298.html">Draw_Segments_Top_Grade</a>)</th></tr>
+<tr>
+<td><img src="../images/top-grade.png" alt="Top grade badge"/></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<table>
+<tr><th>Ending portrait (lines 9870-9871 / <a href="../asm/62331.html">Draw_Segments_Ending</a>, <a href="../asm/62240.html">Plot_Points</a>)</th></tr>
+<tr>
+<td><img src="../images/ending.png" alt="Ending portrait"/></td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<table>
+<tr><th>Wanted-poster face (lines 7010-7065)</th></tr>
+<tr>
+<td><img src="../images/wanted-face.png" alt="Wanted-poster face"/></td>
+</tr>
+</table>
+</div>
+</div>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird Software Ltd<br />&copy; 2026 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.2.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/pobtastic/thewildbunch/">Source code</a>.</div>
+<div><a href="../../graphics/graphics.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>

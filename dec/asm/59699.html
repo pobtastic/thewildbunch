@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>The Wild Bunch: Routine at 59699</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="The Wild Bunch: Routine at 59699. Complete ZX Spectrum RAM disassembly." />
+<meta property="og:title" content="The Wild Bunch: Routine at 59699" />
+<meta property="og:description" content="The Wild Bunch: Routine at 59699. Complete ZX Spectrum RAM disassembly." />
+<meta property="og:site_name" content="ArcadeGeek" />
+<meta property="og:type" content="article" />
+<link rel="canonical" href="https://skoolkit.arcadegeek.co.uk/thewildbunch/asm/59699.html" />
+<meta property="og:url" content="https://skoolkit.arcadegeek.co.uk/thewildbunch/asm/59699.html" />
+<meta property="og:image" content="https://skoolkit.arcadegeek.co.uk/thewildbunch/images/logo.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@graph": [
+{
+"@type": "WebSite",
+"@id": "https://skoolkit.arcadegeek.co.uk/#website",
+"name": "ArcadeGeek",
+"url": "https://skoolkit.arcadegeek.co.uk/"
+},
+{
+"@type": "TechArticle",
+"headline": "The Wild Bunch: Routine at 59699",
+"name": "The Wild Bunch: Routine at 59699",
+"description": "The Wild Bunch: Routine at 59699. Complete ZX Spectrum RAM disassembly.",
+"inLanguage": "en",
+"isPartOf": {"@id": "https://skoolkit.arcadegeek.co.uk/#website"},
+"author": {
+"@type": "Organization",
+"name": "ArcadeGeek",
+"url": "https://www.arcadegeek.co.uk/"
+},
+"about": {
+"@type": "VideoGame",
+"name": "The Wild Bunch",
+"gamePlatform": "ZX Spectrum"
+}
+,"url": "https://skoolkit.arcadegeek.co.uk/thewildbunch/asm/59699.html"
+,"image": "https://skoolkit.arcadegeek.co.uk/thewildbunch/images/logo.png"
+},
+{
+"@type": "BreadcrumbList",
+"itemListElement": [
+{
+"@type": "ListItem",
+"position": 1,
+"name": "ArcadeGeek",
+"item": "https://skoolkit.arcadegeek.co.uk/"
+},
+{
+"@type": "ListItem",
+"position": 2,
+"name": "The Wild Bunch"
+,"item": "https://skoolkit.arcadegeek.co.uk/thewildbunch/"
+}
+,{
+"@type": "ListItem",
+"position": 3,
+"name": "Routine at 59699"
+,"item": "https://skoolkit.arcadegeek.co.uk/thewildbunch/asm/59699.html"
+}
+]
+}
+]
+}
+</script>
+<link rel="stylesheet" type="text/css" href="../skoolkit.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-dark.css" />
+<link rel="stylesheet" type="text/css" href="../skoolkit-wide.css" />
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="async"
+src="https://www.googletagmanager.com/gtag/js?id=G-75RERFCHBG"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-75RERFCHBG');
+</script>
+</head>
+<body class="Asm-c">
+<table class="header">
+<tr>
+<td class="logo"><a href="../index.html"><img alt="logo" src="../images/logo.png" /></a></td>
+<td class="page-header">Routines</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="59697.html">59697</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#59699">Map</a></td>
+<td class="next">
+Next: <a href="59807.html">59807</a>
+</td>
+</tr>
+</table>
+<div class="description">59699: Run Bootstrap</div>
+<table class="disassembly">
+<tr>
+<td class="routine-comment" colspan="5">
+<div class="details">
+<div class="paragraph">
+One-shot startup trampoline. BASIC line 1 enters here via USR(VARS-116). It is not game logic: it finishes the load, replaces the decoy line 1 at <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23635.html">PROG</a> with the real opening from <a href="23297.html">Bootstrap_Workspace</a>, points BASIC at line 9999 via <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23618.html">NEWPPC</a> (that line <code>GO TO</code>s 15, then reclaims this stub with <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/6629.html">RECLAIM-1</a> and falls into the interpreter. It never returns from <code>USR</code>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59699"></span>
+<div class="comments">
+<div class="paragraph">
+Point <span class="register">IX</span> at the machine stack and read the USR return word.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Run_Bootstrap</td>
+<td class="address-2"><span id="59699"></span>59699</td>
+<td class="instruction">LD IX,0</td>
+<td class="comment-1" rowspan="1">Clear <span class="register">IX</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59703"></span>59703</td>
+<td class="instruction">ADD IX,SP</td>
+<td class="comment-1" rowspan="1">Point <span class="register">IX</span> at the machine stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59705"></span>59705</td>
+<td class="instruction">LD A,(IX+20)</td>
+<td class="comment-1" rowspan="1">Fetch the low byte of the USR return address into <span class="register">A</span>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59708"></span>
+<div class="comments">
+<div class="paragraph">
+Shuffle the USR return address and stash the reclaim start.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59708"></span>59708</td>
+<td class="instruction">DI</td>
+<td class="comment-1" rowspan="1">Disable interrupts.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59709"></span>59709</td>
+<td class="instruction">SLA (IX+21)</td>
+<td class="comment-1" rowspan="1">Shift the high byte of the USR return address right.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59713"></span>59713</td>
+<td class="instruction">SLA A</td>
+<td class="comment-1" rowspan="1">Shift the low byte of the USR return address left.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59715"></span>59715</td>
+<td class="instruction">LD (IX+20),A</td>
+<td class="comment-1" rowspan="1">Write the shuffled low byte back to the stack frame.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59718"></span>59718</td>
+<td class="instruction">XOR (IX+21)</td>
+<td class="comment-1" rowspan="1">Mix in the high byte of the USR return address.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59721"></span>59721</td>
+<td class="instruction">PUSH BC</td>
+<td class="comment-1" rowspan="1">Stash the reclaim start address on the stack.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59722"></span>
+<div class="comments">
+<div class="paragraph">
+Prepare flags and timing for the pilot-tone search.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59722"></span>59722</td>
+<td class="instruction">LD IX,1</td>
+<td class="comment-1" rowspan="1">Set <span class="register">IX</span> to 0001.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59726"></span>59726</td>
+<td class="instruction">AND A</td>
+<td class="comment-1" rowspan="1">Clear the carry flag.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59727"></span>59727</td>
+<td class="instruction">SCF</td>
+<td class="comment-1" rowspan="1">Set the carry flag.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59728"></span>59728</td>
+<td class="instruction">EX AF,AF'</td>
+<td class="comment-1" rowspan="1">Switch to the shadow flags.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59729"></span>59729</td>
+<td class="instruction">LD C,34</td>
+<td class="comment-1" rowspan="1">Set the EAR/border state in <span class="register">C</span> to 34.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59731"></span>
+<div class="comments">
+<div class="paragraph">
+Listen for six double edges that look like a pilot pulse.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Run_Bootstrap_Detect_Pilot</td>
+<td class="address-2"><span id="59731"></span>59731</td>
+<td class="instruction">LD E,6</td>
+<td class="comment-1" rowspan="1">Set the pilot pair count in <span class="register">E</span> to 6.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59733"></span>
+<div class="comments">
+<div class="paragraph">
+Timing loop body.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Run_Bootstrap_Detect_Pilot_Loop</td>
+<td class="address-2"><span id="59733"></span>59733</td>
+<td class="instruction">LD B,156</td>
+<td class="comment-1" rowspan="1">Set the timing constant in <span class="register">B</span> to 156.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59735"></span>59735</td>
+<td class="instruction">CALL 1507</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/1507.html">LD-EDGE-2</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59738"></span>59738</td>
+<td class="instruction">JR NC,<a href="59699.html#59731">Run_Bootstrap_Detect_Pilot</a></td>
+<td class="comment-1" rowspan="1">Jump back to <a href="59699.html#59731">Run_Bootstrap_Detect_Pilot</a> if the carry flag is reset.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59740"></span>59740</td>
+<td class="instruction">LD A,198</td>
+<td class="comment-1" rowspan="3">Jump back to <a href="59699.html#59731">Run_Bootstrap_Detect_Pilot</a> if <span class="register">B</span> is at least 198.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59742"></span>59742</td>
+<td class="instruction">CP B</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59743"></span>59743</td>
+<td class="instruction">JR NC,<a href="59699.html#59731">Run_Bootstrap_Detect_Pilot</a></td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59745"></span>59745</td>
+<td class="instruction">DEC E</td>
+<td class="comment-1" rowspan="1">Decrease the pilot pair count by one.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59746"></span>59746</td>
+<td class="instruction">JR NZ,<a href="59699.html#59733">Run_Bootstrap_Detect_Pilot_Loop</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="59699.html#59733">Run_Bootstrap_Detect_Pilot_Loop</a> until the pilot pair count is zero.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59748"></span>59748</td>
+<td class="instruction">INC E</td>
+<td class="comment-1" rowspan="1">Increase the pilot pair count by one.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59749"></span>
+<div class="comments">
+<div class="paragraph">
+Prepare the data-block load into <a href="23297.html">Bootstrap_Workspace</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59749"></span>59749</td>
+<td class="instruction">LD A,255</td>
+<td class="comment-1" rowspan="1">Set <span class="register">A</span> to 255 to indicate this is a data block, not a header.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59751"></span>59751</td>
+<td class="instruction">SCF</td>
+<td class="comment-1" rowspan="1">Set the carry flag (load, do not verify).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59752"></span>59752</td>
+<td class="instruction">EX AF,AF'</td>
+<td class="comment-1" rowspan="1">Switch to the shadow flags.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59753"></span>59753</td>
+<td class="instruction">LD DE,71</td>
+<td class="comment-1" rowspan="1">Set the block length in <span class="register">DE</span> to 0071 bytes.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59756"></span>59756</td>
+<td class="instruction">LD IX,23297</td>
+<td class="comment-1" rowspan="1">Point the load destination in <span class="register">IX</span> at <a href="23297.html">Bootstrap_Workspace</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59760"></span>
+<div class="comments">
+<div class="paragraph">
+Load the data block via <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/1366.html&#35;1423">LD-SYNC</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59760"></span>59760</td>
+<td class="instruction">CALL 1423</td>
+<td class="comment-1" rowspan="1">Call <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/1366.html&#35;1423">LD-SYNC</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59763"></span>
+<div class="comments">
+<div class="paragraph">
+Apply the workspace patch and hand control back to BASIC.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Run_Bootstrap_Apply</td>
+<td class="address-1"><span id="59763"></span>59763</td>
+<td class="instruction">DI</td>
+<td class="comment-1" rowspan="1">Disable interrupts.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59764"></span>59764</td>
+<td class="instruction">LD DE,(23359)</td>
+<td class="comment-1" rowspan="1">Fetch the reclaim end address into <span class="register">DE</span> from <a href="23297.html#23359">Bootstrap_Reclaim_End</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59768"></span>59768</td>
+<td class="instruction">JR <a href="59699.html#59770">Run_Bootstrap_Apply_Body</a></td>
+<td class="comment-1" rowspan="1">Jump to <a href="59699.html#59770">Run_Bootstrap_Apply_Body</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59770"></span>
+<div class="comments">
+<div class="paragraph">
+Set NEWPPC from the loaded workspace.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label">Run_Bootstrap_Apply_Body</td>
+<td class="address-2"><span id="59770"></span>59770</td>
+<td class="instruction">LD HL,(23635)</td>
+<td class="comment-1" rowspan="1">Fetch <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23635.html">PROG</a> into <span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59773"></span>59773</td>
+<td class="instruction">EX DE,HL</td>
+<td class="comment-1" rowspan="1">Exchange <span class="register">DE</span> and <span class="register">HL</span>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59774"></span>59774</td>
+<td class="instruction">LD BC,(23361)</td>
+<td class="comment-1" rowspan="2">Write *<a href="23297.html#23361">Bootstrap_New_Line</a> to *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23618.html">NEWPPC</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59778"></span>59778</td>
+<td class="instruction">LD (23618),BC</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59782"></span>59782</td>
+<td class="instruction">LD (IY+10),0</td>
+<td class="comment-1" rowspan="1">Clear <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23620.html">NSPPC</a>.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59786"></span>
+<div class="comments">
+<div class="paragraph">
+Copy the workspace over <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23635.html">PROG</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59786"></span>59786</td>
+<td class="instruction">LD HL,23297</td>
+<td class="comment-1" rowspan="3">Copy 62 bytes from <a href="23297.html">Bootstrap_Workspace</a> over *<a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23635.html">PROG</a>.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59789"></span>59789</td>
+<td class="instruction">LD BC,62</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59792"></span>59792</td>
+<td class="instruction">LDIR</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59794"></span>
+<div class="comments">
+<div class="paragraph">
+Seed <span class="register">HL'</span> and enable interrupts.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59794"></span>59794</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">Switch to the shadow registers.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59795"></span>59795</td>
+<td class="instruction">LD HL,10072</td>
+<td class="comment-1" rowspan="1">Set <span class="register">HL'</span> to 10072.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59798"></span>59798</td>
+<td class="instruction">EXX</td>
+<td class="comment-1" rowspan="1">Switch back to the normal registers.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59799"></span>59799</td>
+<td class="instruction">EI</td>
+<td class="comment-1" rowspan="1">Enable interrupts.</td>
+</tr>
+<tr>
+<td class="routine-comment" colspan="5">
+<span id="59800"></span>
+<div class="comments">
+<div class="paragraph">
+Reclaim this stub via <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/6629.html">RECLAIM-1</a>.
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59800"></span>59800</td>
+<td class="instruction">POP DE</td>
+<td class="comment-1" rowspan="1">Restore the reclaim start address into <span class="register">DE</span> from the stack.</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59801"></span>59801</td>
+<td class="instruction">LD HL,(23627)</td>
+<td class="comment-1" rowspan="1">Fetch <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/23627.html">VARS</a> into <span class="register">HL</span> (reclaim end).</td>
+</tr>
+<tr>
+<td class="asm-label"></td>
+<td class="address-1"><span id="59804"></span>59804</td>
+<td class="instruction">JP 6629</td>
+<td class="comment-1" rowspan="1">Jump to <a rel="noopener nofollow" href="https://skoolkit.ca/disassemblies/rom/asm/6629.html">RECLAIM-1</a>.</td>
+</tr>
+</table>
+<table class="asm-navigation">
+<tr>
+<td class="prev">
+Prev: <a href="59697.html">59697</a>
+</td>
+<td class="up">Up: <a href="../maps/all.html#59699">Map</a></td>
+<td class="next">
+Next: <a href="59807.html">59807</a>
+</td>
+</tr>
+</table>
+<footer>
+<div class="release"></div>
+<div class="copyright">&copy; 1984 Firebird Software Ltd<br />&copy; 2026 ArcadeGeek LTD.</div>
+<div class="created">Created using <a href="https://skoolkit.ca">SkoolKit</a> 10.2.</div>
+<div class="repository">Link to <a rel="noopener nofollow" href="https://github.com/pobtastic/thewildbunch/">Source code</a>.</div>
+<div><a href="../../asm/E933.html">Switch to hexadecimal</a>.</div>
+</footer>
+</body>
+</html>
